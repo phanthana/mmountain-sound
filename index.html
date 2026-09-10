@@ -411,7 +411,7 @@ function drawTicket(order){
 }
 
 $("sendWhatsApp").addEventListener("click",()=>{ trackEvent("whatsapp_booking",{ticket_number:currentOrder.ticketNumber});
-  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"id="nationality"+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
+  const text=encodeURIComponent("Mountain Sound ticket confirmation\nName: "+currentOrder.name+"\nNationality: "+currentOrder.nationality+"\nWhatsApp: "+currentOrder.customerWhatsApp+"\nTicket: "+currentOrder.ticketNumber);
   const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
   window.open(web,"_blank","noopener,noreferrer");
 });
