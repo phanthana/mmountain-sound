@@ -286,7 +286,19 @@ function resetBuy(){
   $("nationalityField").classList.remove("invalid");
   $("step1").style.display="block";$("step2").style.display="none";$("step3").style.display="none";
 }
-function startBuy(){resetBuy();openOverlay($("buyOverlay"))}
+function trackEvent(name, params){
+  if(typeof gtag==="function") gtag("event", name, params || {});
+}
+
+function startBuy(){
+  resetBuy();
+  trackEvent("buy_ticket",{
+    ticket_type:"Mountain Sound Daytime Party",
+    value:150000,
+    currency:"LAK"
+  });
+  openOverlay($("buyOverlay"));
+}
 ["navBuy","heroBuy","ticketBuy","closerBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
 
 $("viewTicket").addEventListener("click",()=>openOverlay($("viewOverlay")));
@@ -303,6 +315,19 @@ $("detailsForm").addEventListener("submit",e=>{
   $("nationalityField").classList.toggle("invalid",nationality.length<2);
   if(name.length<2||nationality.length<2)return;
   currentOrder.name=name;currentOrder.nationality=nationality;
+
+trackEvent("begin_checkout",{
+  currency:"LAK",
+  value:150000,
+  items:[{
+    item_id:"MS-DAYTIME-150K",
+    item_name:"Mountain Sound Daytime Party Ticket",
+    price:150000,
+    quantity:1
+  }]
+});
+
+$("summaryName").textContent=name;
   $("summaryName").textContent=name;
   $("step1").style.display="none";$("step2").style.display="block";
 });
@@ -321,7 +346,20 @@ $("confirmPaid").addEventListener("click",()=>{
   setTimeout(()=>{
     currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
     saveOrder({...currentOrder});
-    drawTicket(currentOrder);
+
+trackEvent("purchase",{
+  transaction_id:currentOrder.ticketNumber,
+  value:150000,
+  currency:"LAK",
+  items:[{
+    item_id:"MS-DAYTIME-150K",
+    item_name:"Mountain Sound Daytime Party Ticket",
+    price:150000,
+    quantity:1
+  }]
+});
+
+drawTicket(currentOrder);
     $("step2").style.display="none";$("step3").style.display="block";
     btn.disabled=false;btn.textContent="I've paid — confirm";
   },700);
@@ -343,9 +381,13 @@ function drawTicket(order){
     while(ctx.measureText(text).width>max&&size>10){size-=1;ctx.font="600 "+size+"px Arial"}
     ctx.fillText(text,x1+pad,y1+bh/2+size*.03);
   }
-}
-
+  }
 $("sendWhatsApp").addEventListener("click",()=>{
+   trackEvent("whatsapp_booking",{
+    ticket_number:currentOrder.ticketNumber,
+    value:150000,
+    currency:"LAK"
+  });
   const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
   const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
   window.open(web,"_blank","noopener,noreferrer");
