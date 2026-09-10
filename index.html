@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEEZV8TTRB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QEEZV8TTRB');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mountain Sound | Vang Vieng</title>
@@ -101,19 +92,51 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .orders-table{width:100%;border-collapse:collapse;font:12px "Avenir Next",Arial,sans-serif}
 .orders-table th,.orders-table td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
 .empty{font:13px "Avenir Next",Arial,sans-serif;color:var(--muted)}
+/* Mobile improvements */
 @media(max-width:800px){
- nav a:not(.nav-buy){display:none}
- .hero-content{padding-bottom:40px}
- .features,.details,.ticket-grid{grid-template-columns:1fr;gap:36px}
- .facts{grid-template-columns:1fr 1fr}
- section{padding:80px 0}
+  header{padding:14px 16px}
+  nav{gap:8px}
+  nav a{display:none}
+  nav a.nav-buy{display:inline-block}
+  .brand{font-size:13px;letter-spacing:.12em}
+  .hero{min-height:78vh}
+  .hero>img{object-position:center}
+  .hero-content{display:none}
+  .features,.details,.ticket-grid{grid-template-columns:1fr;gap:30px}
+  .facts{grid-template-columns:1fr 1fr;gap:22px 16px}
+  section{padding:72px 0}
+  .poster{max-width:620px;margin:0 auto}
+  .ticket-grid{align-items:stretch}
+  .ticket-card{max-width:620px;margin:auto}
+  .ticket-grid .lead{font-size:16px}
+  .btn,.btn-block{min-height:48px}
+  .modal{max-height:92vh}
 }
 @media(max-width:520px){
- header{padding:15px 16px}.wrap{padding:0 18px}.hero-content{padding-left:18px;padding-right:18px}
- .hero p{font-size:16px}.facts{grid-template-columns:1fr}
- .modal{padding:28px 20px}
+  .wrap{padding:0 16px}
+  header{padding:12px 14px}
+  .hero{min-height:70vh}
+  .facts{grid-template-columns:1fr}
+  .fact dd{font-size:17px}
+  .poster{padding:6px}
+  .ticket-card{padding:6px}
+  .closer{padding:90px 0}
+  .modal{padding:26px 17px}
+  .modal h3{font-size:23px}
+  .field input{font-size:16px}
+  .btn-block,.btn-block-ghost{min-height:50px}
 }
 </style>
+
+<!-- Google Analytics: replace G-QEEZV8TTRB with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEEZV8TTRB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QEEZV8TTRB');
+</script>
+
 </head>
 <body>
 <header>
@@ -172,7 +195,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <div class="contact">WhatsApp: <a href="https://wa.me/8562055615282">+856 20 5561 5282</a></div>
     </div>
     <div class="poster">
-      <img src="images/hero.jpg" alt="Mountain Sound daytime party">
+      <img src="images/poster.png" alt="Mountain Sound Sunday Daytime Party poster">
     </div>
   </div>
 </section>
@@ -260,7 +283,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <button class="btn-block" id="adminLoginBtn">View orders</button>
     </div>
     <div id="adminOrders" style="display:none">
-      <div class="step-tag">Organizer</div><h3>Ticket orders</h3><p class="sub">Stored on this device only.</p>
+      <div class="step-tag">Organizer</div><h3>Ticket orders</h3><p class="sub">Orders are stored on this device and can also sync to your online order database when connected.</p>
       <div id="ordersContent"></div>
     </div>
   </div>
@@ -272,6 +295,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 const $=id=>document.getElementById(id);
 const STORAGE_KEY="mountainSoundOrders";
 const ADMIN_PASSCODE="MountainSound2026";
+const ORDER_API_URL="PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 const ORGANIZER_WHATSAPP="8562055615282";
 let currentOrder={name:"",nationality:"",ticketNumber:"",date:""};
 
@@ -286,17 +310,16 @@ function resetBuy(){
   $("nationalityField").classList.remove("invalid");
   $("step1").style.display="block";$("step2").style.display="none";$("step3").style.display="none";
 }
-function trackEvent(name, params){
-  if(typeof gtag==="function") gtag("event", name, params || {});
+function trackEvent(name,params){
+  try{if(typeof gtag==="function")gtag("event",name,params||{})}catch(e){}
 }
-
 function startBuy(){
-  resetBuy();
   trackEvent("buy_ticket",{
-    ticket_type:"Mountain Sound Daytime Party",
+    currency:"LAK",
     value:150000,
-    currency:"LAK"
+    item_name:"Mountain Sound Daytime Party Ticket"
   });
+  resetBuy();
   openOverlay($("buyOverlay"));
 }
 ["navBuy","heroBuy","ticketBuy","closerBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
@@ -315,19 +338,16 @@ $("detailsForm").addEventListener("submit",e=>{
   $("nationalityField").classList.toggle("invalid",nationality.length<2);
   if(name.length<2||nationality.length<2)return;
   currentOrder.name=name;currentOrder.nationality=nationality;
-
-trackEvent("begin_checkout",{
-  currency:"LAK",
-  value:150000,
-  items:[{
-    item_id:"MS-DAYTIME-150K",
-    item_name:"Mountain Sound Daytime Party Ticket",
-    price:150000,
-    quantity:1
-  }]
-});
-
-$("summaryName").textContent=name;
+  trackEvent("begin_checkout",{
+    currency:"LAK",
+    value:150000,
+    items:[{
+      item_id:"MS-DAYTIME-150K",
+      item_name:"Mountain Sound Daytime Party Ticket",
+      price:150000,
+      quantity:1
+    }]
+  });
   $("summaryName").textContent=name;
   $("step1").style.display="none";$("step2").style.display="block";
 });
@@ -336,9 +356,22 @@ function generateTicketNumber(){
   const d=new Date(), datePart=String(d.getFullYear()).slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
   return "MS-"+datePart+"-"+Math.floor(1000+Math.random()*9000);
 }
-function saveOrder(o){
+async function saveOrder(o){
   let orders=[];try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){}
   orders.push(o);localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
+
+  if(ORDER_API_URL && !ORDER_API_URL.includes("PASTE_GOOGLE_APPS_SCRIPT")){
+    try{
+      await fetch(ORDER_API_URL,{
+        method:"POST",
+        mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(o)
+      });
+    }catch(e){
+      console.warn("Online order sync failed; local copy retained.",e);
+    }
+  }
 }
 
 $("confirmPaid").addEventListener("click",()=>{
@@ -346,20 +379,13 @@ $("confirmPaid").addEventListener("click",()=>{
   setTimeout(()=>{
     currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
     saveOrder({...currentOrder});
-
-trackEvent("purchase",{
-  transaction_id:currentOrder.ticketNumber,
-  value:150000,
-  currency:"LAK",
-  items:[{
-    item_id:"MS-DAYTIME-150K",
-    item_name:"Mountain Sound Daytime Party Ticket",
-    price:150000,
-    quantity:1
-  }]
-});
-
-drawTicket(currentOrder);
+    trackEvent("ticket_generated",{
+      ticket_number:currentOrder.ticketNumber,
+      currency:"LAK",
+      value:150000,
+      item_name:"Mountain Sound Daytime Party Ticket"
+    });
+    drawTicket(currentOrder);
     $("step2").style.display="none";$("step3").style.display="block";
     btn.disabled=false;btn.textContent="I've paid — confirm";
   },700);
@@ -381,18 +407,14 @@ function drawTicket(order){
     while(ctx.measureText(text).width>max&&size>10){size-=1;ctx.font="600 "+size+"px Arial"}
     ctx.fillText(text,x1+pad,y1+bh/2+size*.03);
   }
-  }
-$("sendWhatsApp").addEventListener("click",()=>{
-   trackEvent("whatsapp_booking",{
-    ticket_number:currentOrder.ticketNumber,
-    value:150000,
-    currency:"LAK"
-  });
+}
+
+$("sendWhatsApp").addEventListener("click",()=>{ trackEvent("whatsapp_booking",{ticket_number:currentOrder.ticketNumber});
   const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
   const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
   window.open(web,"_blank","noopener,noreferrer");
 });
-$("downloadTicket").addEventListener("click",()=>{
+$("downloadTicket").addEventListener("click",()=>{ trackEvent("ticket_download",{ticket_number:currentOrder.ticketNumber});
   const a=document.createElement("a");a.download="mountain-sound-ticket-"+currentOrder.ticketNumber+".png";
   try{a.href=$("ticketCanvas").toDataURL("image/png");a.click()}catch(e){alert("Please take a screenshot of your ticket and send it to us on WhatsApp.")}
 });
