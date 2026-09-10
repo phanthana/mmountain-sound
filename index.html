@@ -245,10 +245,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <form id="detailsForm" novalidate>
         <div class="field" id="nameField"><label for="fullName">Full name</label><input id="fullName" placeholder="e.g. Somchai Vongsa"><div class="field-error">Please enter your full name.</div></div>
         <div class="field" id="nationalityField"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Lao, French, Australian"><div class="field-error">Please enter your nationality.</div></div>
+        <div class="field"><label for="customerWhatsApp">WhatsApp number</label><input id="customerWhatsApp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+856 20 1234 5678" required></div>
         <button class="btn-block" type="submit">Continue to payment</button>
       </form>
     </div>
-
     <div id="step2" style="display:none">
       <div class="step-tag">Step 2 of 3</div>
       <h3>Scan &amp; pay</h3>
@@ -337,7 +337,8 @@ $("detailsForm").addEventListener("submit",e=>{
   $("nameField").classList.toggle("invalid",name.length<2);
   $("nationalityField").classList.toggle("invalid",nationality.length<2);
   if(name.length<2||nationality.length<2)return;
-  currentOrder.name=name;currentOrder.nationality=nationality;
+ const customerWhatsApp=$("customerWhatsApp").value.trim();currentOrder.name=name;currentOrder.nationality=nationality;currentOrder.customerWhatsApp=customerWhatsApp;
+;
   trackEvent("begin_checkout",{
     currency:"LAK",
     value:150000,
@@ -410,7 +411,7 @@ function drawTicket(order){
 }
 
 $("sendWhatsApp").addEventListener("click",()=>{ trackEvent("whatsapp_booking",{ticket_number:currentOrder.ticketNumber});
-  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
+  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"id="nationality"+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
   const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
   window.open(web,"_blank","noopener,noreferrer");
 });
