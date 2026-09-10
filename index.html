@@ -4,220 +4,130 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mountain Sound | Vang Vieng</title>
-<meta name="description" content="Mountain Sound daytime party every Sunday by the riverside in Vang Vieng, Laos. Music, nature, cold drinks, and sunset views.">
+<meta name="description" content="Mountain Sound — Sunday daytime party by the riverside in Vang Vieng, Laos. Nature, music, community and sunset.">
 <meta property="og:title" content="Mountain Sound — Daytime Party Series">
 <meta property="og:description" content="Every Sunday, 1PM to sunset, riverside in Vang Vieng.">
 <meta property="og:image" content="images/hero.jpg">
-<meta name="theme-color" content="#15150f">
+<meta name="theme-color" content="#11130e">
 <style>
-  :root{
-    --bg:#15150f;
-    --bg-raised:#1c1c14;
-    --cream:#f3ede0;
-    --cream-dim:#c9c2b0;
-    --line:#39392c;
-    --gold:#e2a84b;
-    --gold-dim:#a97f3a;
-    --river:#5f8f88;
-    --error:#d9694f;
-    --radius:2px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--cream);
-    font-family:"Iowan Old Style","Georgia",serif;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  .sans{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;}
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  button{font-family:inherit;cursor:pointer;}
-
-  /* ---------- layout helpers ---------- */
-  .wrap{max-width:1100px;margin:0 auto;padding:0 28px;}
-  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
-  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
-
-  /* ---------- nav ---------- */
-  header{
-    position:fixed;top:28px;left:0;right:0;z-index:40;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:20px 28px;
-    background:linear-gradient(to bottom, rgba(21,21,15,.85), rgba(21,21,15,0));
-  }
-  .brand{font-size:15px;letter-spacing:.14em;font-family:"Avenir Next",sans-serif;font-weight:600;}
-  nav.links{display:flex;gap:28px;align-items:center;}
-  nav.links a{font-size:14px;font-family:"Avenir Next",sans-serif;color:var(--cream-dim);}
-  nav.links a:hover{color:var(--cream);}
-  .btn-nav{
-    font-family:"Avenir Next",sans-serif;font-size:14px;font-weight:600;
-    background:var(--gold);color:#1a1508;padding:10px 18px;border:none;border-radius:var(--radius);
-  }
-  .btn-nav:hover{background:#eeb862;}
-  @media (max-width:720px){ nav.links a:not(.btn-nav){display:none;} }
-
-  /* ---------- hero ---------- */
-  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
-  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55);}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(21,21,15,.95) 5%, rgba(21,21,15,.15) 55%);}
-  .hero-inner{position:relative;padding:0 28px 72px;width:100%;}
-  .kicker{font-family:"Avenir Next",sans-serif;font-size:13px;letter-spacing:.08em;color:var(--gold);margin-bottom:18px;}
-  .hero h1{
-    font-size:clamp(40px,7vw,84px);font-weight:400;line-height:1.02;max-width:780px;margin-bottom:22px;
-  }
-  .hero p.lede{max-width:480px;font-size:18px;color:var(--cream-dim);margin-bottom:32px;}
-  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:34px;}
-  .btn-primary{
-    font-family:"Avenir Next",sans-serif;font-weight:600;font-size:15px;
-    background:var(--gold);color:#1a1508;padding:15px 26px;border:none;border-radius:var(--radius);
-  }
-  .btn-primary:hover{background:#eeb862;}
-  .btn-secondary{
-    font-family:"Avenir Next",sans-serif;font-weight:600;font-size:15px;
-    color:var(--cream);padding:15px 4px;border:none;background:transparent;border-bottom:1px solid var(--gold-dim);
-  }
-  .btn-secondary:hover{border-color:var(--gold);}
-  .schedule-line{font-family:"Avenir Next",sans-serif;font-size:14px;color:var(--cream-dim);}
-  .schedule-line strong{color:var(--cream);font-weight:600;}
-
-  /* ---------- sections ---------- */
-  section{padding:110px 0;border-top:1px solid var(--line);}
-  .section-head{margin-bottom:56px;max-width:620px;}
-  .eyebrow{font-family:"Avenir Next",sans-serif;font-size:13px;color:var(--river);margin-bottom:14px;}
-  .section-head h2{font-size:clamp(28px,4vw,42px);font-weight:400;line-height:1.15;}
-
-  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
-  .feature h3{font-size:21px;font-weight:400;margin-bottom:10px;}
-  .feature p{color:var(--cream-dim);font-size:15px;}
-  @media (max-width:800px){.feature-grid{grid-template-columns:1fr;gap:36px;}}
-
-  .details-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:start;}
-  .fact-list{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px;margin-bottom:36px;}
-  .fact dt{font-family:"Avenir Next",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--gold-dim);margin-bottom:6px;}
-  .fact dd{font-size:18px;}
-  .fact dd small{display:block;font-size:14px;color:var(--cream-dim);font-family:"Avenir Next",sans-serif;margin-top:2px;}
-  .contact-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;font-family:"Avenir Next",sans-serif;font-size:14px;}
-  .poster-frame{border:1px solid var(--line);padding:10px;background:var(--bg-raised);}
-  @media (max-width:800px){.details-grid{grid-template-columns:1fr;} .fact-list{grid-template-columns:1fr 1fr;}}
-
-  .ticket-section .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;}
-  .ticket-card{border:1px solid var(--line);background:var(--bg-raised);padding:14px;cursor:pointer;transition:border-color .2s;}
-  .ticket-card:hover{border-color:var(--gold-dim);}
-  .ticket-card span{display:block;text-align:center;font-family:"Avenir Next",sans-serif;font-size:12px;color:var(--cream-dim);margin-top:10px;}
-  @media (max-width:800px){.ticket-section .wrap{grid-template-columns:1fr;}}
-
-  .closer{text-align:center;padding:130px 0;}
-  .closer h2{font-size:clamp(32px,5vw,54px);font-weight:400;margin-bottom:36px;}
-
-  footer{border-top:1px solid var(--line);padding:40px 0;font-family:"Avenir Next",sans-serif;font-size:13px;color:var(--cream-dim);}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-
-  /* ---------- modal shell ---------- */
-  .overlay{
-    position:fixed;inset:0;background:rgba(10,10,7,.82);z-index:100;
-    display:none;align-items:center;justify-content:center;padding:20px;
-  }
-  .overlay.open{display:flex;}
-  .modal{
-    background:var(--bg-raised);border:1px solid var(--line);max-width:460px;width:100%;
-    max-height:88vh;overflow-y:auto;position:relative;padding:36px 30px 30px;
-  }
-  .modal.wide{max-width:420px;}
-  .modal-close{
-    position:absolute;top:14px;right:14px;background:transparent;border:none;color:var(--cream-dim);
-    font-size:22px;line-height:1;padding:8px;
-  }
-  .modal-close:hover{color:var(--cream);}
-  .modal img.simple{border:1px solid var(--line);}
-
-  /* ---------- buy flow ---------- */
-  .step-tag{font-family:"Avenir Next",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--gold);margin-bottom:6px;}
-  .modal h3{font-size:24px;font-weight:400;margin-bottom:6px;}
-  .modal .sub{font-family:"Avenir Next",sans-serif;font-size:14px;color:var(--cream-dim);margin-bottom:26px;}
-
-  .field{margin-bottom:18px;}
-  .field label{display:block;font-family:"Avenir Next",sans-serif;font-size:13px;color:var(--cream-dim);margin-bottom:7px;}
-  .field input, .field select{
-    width:100%;background:#0f0f0a;border:1px solid var(--line);color:var(--cream);
-    padding:12px 13px;font-family:"Avenir Next",sans-serif;font-size:15px;border-radius:var(--radius);
-  }
-  .field input:focus, .field select:focus{border-color:var(--gold-dim);}
-  .field-error{color:var(--error);font-size:12px;font-family:"Avenir Next",sans-serif;margin-top:6px;display:none;}
-  .field.invalid input, .field.invalid select{border-color:var(--error);}
-  .field.invalid .field-error{display:block;}
-
-  .form-actions{margin-top:8px;}
-  .btn-block{
-    width:100%;font-family:"Avenir Next",sans-serif;font-weight:600;font-size:15px;
-    background:var(--gold);color:#1a1508;padding:14px;border:none;border-radius:var(--radius);
-  }
-  .btn-block:hover{background:#eeb862;}
-  .btn-block:disabled{background:#5a5236;color:#a89f83;cursor:not-allowed;}
-  .btn-block-ghost{
-    width:100%;font-family:"Avenir Next",sans-serif;font-weight:600;font-size:14px;
-    background:transparent;color:var(--cream-dim);padding:12px;border:1px solid var(--line);border-radius:var(--radius);margin-top:10px;
-  }
-  .btn-block-ghost:hover{border-color:var(--gold-dim);color:var(--cream);}
-
-  .order-summary{
-    display:flex;justify-content:space-between;font-family:"Avenir Next",sans-serif;font-size:14px;
-    padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:18px;color:var(--cream-dim);
-  }
-  .order-summary strong{color:var(--cream);}
-
-  .qr-box{text-align:center;margin-bottom:22px;}
-  .qr-box img{width:100%;max-width:260px;margin:0 auto 14px;border:1px solid var(--line);}
-  .amount{font-size:26px;margin-bottom:4px;}
-  .amount small{display:block;font-family:"Avenir Next",sans-serif;font-size:13px;color:var(--cream-dim);}
-  .pay-note{font-family:"Avenir Next",sans-serif;font-size:13px;color:var(--cream-dim);margin-bottom:22px;}
-
-  .spinner{
-    width:18px;height:18px;border:2px solid rgba(26,21,8,.35);border-top-color:#1a1508;
-    border-radius:50%;display:inline-block;vertical-align:-3px;margin-right:8px;
-    animation:spin .7s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg);}}
-
-  .ticket-result{text-align:center;}
-  .ticket-canvas-wrap{border:1px solid var(--line);background:#0f0f0a;padding:8px;margin-bottom:20px;}
-  #ticketCanvas{width:100%;height:auto;display:block;}
-  .success-tag{font-family:"Avenir Next",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--river);margin-bottom:6px;}
-
-  /* ---------- admin ---------- */
-  .admin-trigger{position:fixed;bottom:14px;left:14px;font-size:11px;color:#3a3a2c;font-family:"Avenir Next",sans-serif;background:transparent;border:none;z-index:30;}
-  .orders-table{width:100%;border-collapse:collapse;font-family:"Avenir Next",sans-serif;font-size:13px;margin-top:16px;}
-  .orders-table th,.orders-table td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);}
-  .orders-table th{color:var(--cream-dim);font-weight:600;font-size:11px;letter-spacing:.05em;}
-  .empty-note{font-family:"Avenir Next",sans-serif;font-size:14px;color:var(--cream-dim);margin-top:16px;}
+:root{--bg:#11130e;--panel:#1a1c15;--cream:#f5f0e4;--muted:#c6c0b1;--gold:#e3aa4c;--line:#35372c;--river:#77a99e;--danger:#d96b52}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:Georgia,"Times New Roman",serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer}
+.sans{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:0 28px}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,12,8,.78),rgba(10,12,8,0))}
+.brand{font:600 15px "Avenir Next","Helvetica Neue",Arial,sans-serif;letter-spacing:.16em}
+nav{display:flex;gap:25px;align-items:center;font:14px "Avenir Next","Helvetica Neue",Arial,sans-serif}
+nav a{color:#e6e0d3}
+.btn{border:0;border-radius:2px;background:var(--gold);color:#1a160d;padding:12px 20px;font:600 14px "Avenir Next","Helvetica Neue",Arial,sans-serif}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--cream);border-bottom:1px solid var(--gold);padding:12px 4px}
+.hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:#111}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.15),transparent 45%,rgba(8,10,6,.88) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;width:100%;padding:0 28px 58px}
+.hero-kicker{font:600 12px "Avenir Next",Arial,sans-serif;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(38px,6vw,72px);font-weight:400;line-height:1.02;max-width:720px;margin-bottom:16px}
+.hero p{max-width:600px;color:var(--muted);font-size:18px;margin-bottom:25px}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.schedule{font:14px "Avenir Next",Arial,sans-serif;color:#ddd6c8;margin-top:20px}
+.schedule strong{color:white}
+section{padding:105px 0;border-top:1px solid var(--line)}
+.eyebrow{font:600 12px "Avenir Next",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--river);margin-bottom:14px}
+h2{font-size:clamp(30px,4vw,46px);font-weight:400;line-height:1.12}
+.section-head{max-width:680px;margin-bottom:38px}
+.lead{max-width:720px;color:var(--muted);font-size:17px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:45px;margin-top:50px}
+.feature h3{font-size:22px;font-weight:400;margin-bottom:8px}
+.feature p{color:var(--muted);font-size:15px}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:start}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:28px 22px;margin-top:35px}
+.fact dt{font:600 11px "Avenir Next",Arial,sans-serif;letter-spacing:.08em;color:#9d8a5d;margin-bottom:5px}
+.fact dd{font-size:18px}
+.fact small{display:block;color:var(--muted);font:13px "Avenir Next",Arial,sans-serif;margin-top:2px}
+.contact{margin-top:30px;font:14px "Avenir Next",Arial,sans-serif;color:var(--cream)}
+.poster{border:1px solid var(--line);padding:10px;background:var(--panel)}
+.poster img{width:100%;height:auto}
+.ticket-section{background:#15170f}
+.ticket-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:65px;align-items:center}
+.ticket-card{border:1px solid var(--line);background:#0d0f0b;padding:10px;cursor:pointer;transition:.2s}
+.ticket-card:hover{border-color:var(--gold)}
+.ticket-card img{width:100%}
+.ticket-card span{display:block;text-align:center;padding:10px 4px 4px;font:12px "Avenir Next",Arial,sans-serif;color:var(--muted)}
+.closer{text-align:center;padding:125px 0}
+.closer h2{margin-bottom:28px}
+footer{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);font:13px "Avenir Next",Arial,sans-serif}
+footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.overlay{position:fixed;inset:0;background:rgba(5,7,4,.86);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{position:relative;width:100%;max-width:470px;max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);padding:32px 28px}
+.modal.wide{max-width:560px}
+.close{position:absolute;top:9px;right:12px;border:0;background:transparent;color:var(--muted);font-size:28px;padding:5px}
+.step-tag{font:600 11px "Avenir Next",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.modal h3{font-size:26px;font-weight:400;margin-bottom:7px}
+.sub,.pay-note{font:13px "Avenir Next",Arial,sans-serif;color:var(--muted);margin-bottom:22px}
+.field{margin-bottom:17px}
+.field label{display:block;font:13px "Avenir Next",Arial,sans-serif;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;padding:12px;background:#0c0e09;color:var(--cream);border:1px solid var(--line);font:15px "Avenir Next",Arial,sans-serif}
+.field.invalid input{border-color:var(--danger)}
+.field-error{display:none;color:var(--danger);font:11px "Avenir Next",Arial,sans-serif;margin-top:5px}
+.field.invalid .field-error{display:block}
+.btn-block{width:100%;padding:14px;border:0;background:var(--gold);color:#1a160d;font:600 14px "Avenir Next",Arial,sans-serif}
+.btn-block-ghost{width:100%;padding:12px;margin-top:10px;border:1px solid var(--line);background:transparent;color:var(--muted);font:600 13px "Avenir Next",Arial,sans-serif}
+.order-summary{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:18px;font:13px "Avenir Next",Arial,sans-serif;color:var(--muted)}
+.order-summary strong{color:var(--cream)}
+.qr-box{text-align:center}
+.qr-box img{width:100%;max-width:270px;margin:0 auto 14px;border:1px solid var(--line)}
+.amount{text-align:center;font-size:26px;margin-bottom:5px}
+.amount small{display:block;color:var(--muted);font:12px "Avenir Next",Arial,sans-serif}
+.ticket-result{text-align:center}
+.ticket-canvas-wrap{border:1px solid var(--line);background:#0b0d09;padding:7px;margin-bottom:18px}
+#ticketCanvas{width:100%;height:auto}
+.success{font:600 11px "Avenir Next",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--river);margin-bottom:6px}
+.admin-trigger{position:fixed;left:12px;bottom:10px;z-index:60;border:0;background:transparent;color:#45483b;font:10px Arial}
+.orders-table{width:100%;border-collapse:collapse;font:12px "Avenir Next",Arial,sans-serif}
+.orders-table th,.orders-table td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+.empty{font:13px "Avenir Next",Arial,sans-serif;color:var(--muted)}
+@media(max-width:800px){
+ nav a:not(.nav-buy){display:none}
+ .hero-content{padding-bottom:40px}
+ .features,.details,.ticket-grid{grid-template-columns:1fr;gap:36px}
+ .facts{grid-template-columns:1fr 1fr}
+ section{padding:80px 0}
+}
+@media(max-width:520px){
+ header{padding:15px 16px}.wrap{padding:0 18px}.hero-content{padding-left:18px;padding-right:18px}
+ .hero p{font-size:16px}.facts{grid-template-columns:1fr}
+ .modal{padding:28px 20px}
+}
 </style>
-\n  <!-- IMAGE FILES: replace the files inside /images without changing this HTML.\n       Current files: hero.jpg, ticket-design.jpg, payment-qr.jpg -->\n</head>
+</head>
 <body>
-
 <header>
-  <a href="#top" class="brand">MOUNTAIN SOUND</a>
-  <nav class="links">
+  <a class="brand" href="#top">MOUNTAIN SOUND</a>
+  <nav>
     <a href="#experience">Experience</a>
     <a href="#details">Details</a>
     <a href="#tickets">Ticket</a>
-    <button class="btn-nav" id="navBuyBtn">Buy Ticket</button>
+    <button class="btn nav-buy" id="navBuy">Buy Ticket</button>
   </nav>
 </header>
 
 <section class="hero" id="top">
-  <img src="images/hero.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5) blur(1px);">
-  <!-- PREVIEW NOTE: the real deployed site uses opening.mp4 as a looping background video here instead of this static image. -->
-  <div class="hero-inner wrap">
-    <div class="kicker">Riverside · Vang Vieng · Laos — Daytime Party Series</div>
+  <img src="images/hero.jpg" alt="Mountain Sound riverside setting in Vang Vieng">
+  <div class="hero-content wrap">
+    <div class="hero-kicker">Riverside · Vang Vieng · Laos</div>
     <h1>Find your Sunday rhythm.</h1>
-    <p class="lede">Good music, cold drinks, mountain air. A weekly riverside reset from early afternoon until the last light disappears.</p>
-    <div class="hero-ctas">
-      <button class="btn-primary" id="heroBuyBtn">Buy Ticket</button>
-      <a href="#details" class="btn-secondary">See the details ↓</a>
+    <p>Good music, mountain air and a riverside escape — a daytime party from early afternoon to sunset.</p>
+    <div class="hero-actions">
+      <button class="btn" id="heroBuy">Buy Ticket</button>
+      <a class="btn ghost" href="#details">See the details ↓</a>
     </div>
-    <div class="schedule-line">Every Sunday <strong>1PM</strong> to sunset</div>
+    <div class="schedule">Every Sunday <strong>1PM — Sunset</strong></div>
   </div>
 </section>
 
@@ -225,176 +135,123 @@
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Your Sunday reset</div>
-      <h2>Leave the town. Follow the sound.</h2>
+      <h2>Nature first. Music second. Good people always.</h2>
     </div>
-    <p style="max-width:640px;color:var(--cream-dim);margin-bottom:56px;">Mountain Sound brings a daytime dance floor into the landscape of Vang Vieng — where the river slows down, the mountains close in, and the music carries through the trees. Come for one song or stay for sunset. Bring your friends, meet new ones, and start the week feeling lighter.</p>
-    <div class="feature-grid">
-      <div class="feature">
-        <h3>Music</h3>
-        <p>Laid-back grooves building into sunset energy.</p>
-      </div>
-      <div class="feature">
-        <h3>Nature</h3>
-        <p>Riverside views framed by Vang Vieng's mountains.</p>
-      </div>
-      <div class="feature">
-        <h3>Community</h3>
-        <p>Travelers, locals, dancers, and good people together.</p>
-      </div>
+    <p class="lead">Mountain Sound brings music into the landscape of Vang Vieng — surrounded by limestone mountains, riverside greenery and open skies. Come for the music, stay for the sunset.</p>
+    <div class="features">
+      <div class="feature"><h3>Nature</h3><p>Riverside views and dramatic Vang Vieng mountains all around you.</p></div>
+      <div class="feature"><h3>Music</h3><p>Relaxed daytime grooves building gently toward sunset.</p></div>
+      <div class="feature"><h3>Community</h3><p>Travelers, locals and friends sharing one beautiful Sunday.</p></div>
     </div>
   </div>
 </section>
 
 <section id="details">
-  <div class="wrap details-grid">
+  <div class="wrap details">
     <div>
       <div class="section-head">
         <div class="eyebrow">Plan your day</div>
         <h2>The essentials.</h2>
       </div>
-      <dl class="fact-list">
+      <dl class="facts">
         <div class="fact"><dt>WHEN</dt><dd>Every Sunday<small>1PM — Sunset</small></dd></div>
-        <div class="fact"><dt>WHERE</dt><dd>Riverside location<small>Vang Vieng, Laos</small></dd></div>
+        <div class="fact"><dt>WHERE</dt><dd>Riverside<small>Vang Vieng, Laos</small></dd></div>
         <div class="fact"><dt>ENTRY</dt><dd>150,000 KIP<small>Per person</small></dd></div>
         <div class="fact"><dt>TRANSPORT</dt><dd>Free tuk tuk out<small>Return: 50,000 KIP</small></dd></div>
         <div class="fact"><dt>PICK-UP</dt><dd>DK3 Milan Pizza<small>Confirm time when booking</small></dd></div>
       </dl>
-      <div class="contact-row">
-        <a href="https://wa.me/8562055615282">WhatsApp +856 20 5561 5282</a>
-      </div>
+      <div class="contact">WhatsApp: <a href="https://wa.me/8562055615282">+856 20 5561 5282</a></div>
     </div>
-    <div class="poster-frame">
-      <img src="images/hero.jpg" alt="Mountain Sound daytime party poster">
+    <div class="poster">
+      <img src="images/hero.jpg" alt="Mountain Sound daytime party">
     </div>
   </div>
 </section>
 
 <section id="tickets" class="ticket-section">
-  <div class="wrap">
-    <div>
-      <div class="ticket-card" id="viewTicketBtn">
-        <img src="images/ticket-design.jpg" alt="Mountain Sound event ticket">
-        <span>Tap to view ticket design</span>
-      </div>
+  <div class="wrap ticket-grid">
+    <div class="ticket-card" id="viewTicket">
+      <img src="images/ticket-design.jpg" alt="Mountain Sound ticket design">
+      <span>Tap to view ticket design</span>
     </div>
     <div>
       <div class="eyebrow">Your pass to the riverside</div>
-      <h2 style="font-size:clamp(26px,4vw,38px);font-weight:400;margin-bottom:18px;">One ticket. A full afternoon.</h2>
-      <p style="color:var(--cream-dim);margin-bottom:30px;max-width:420px;">Buy your ticket online: fill in your details, scan the QR to pay, and get a personal ticket with your name and ticket number to keep or show at entry.</p>
-      <button class="btn-primary" id="ticketSectionBuyBtn">Buy Ticket</button>
+      <h2>One ticket. A full afternoon.</h2>
+      <p class="lead" style="margin:20px 0 28px">Fill in your details, scan the Lao QR to pay, then receive a personal ticket with your name and ticket number.</p>
+      <button class="btn" id="ticketBuy">Buy Ticket</button>
     </div>
   </div>
 </section>
 
 <section class="closer">
   <div class="wrap">
-    <div class="eyebrow" style="justify-content:center;display:flex;">This Sunday</div>
+    <div class="eyebrow">This Sunday</div>
     <h2>Meet us by the river.</h2>
-    <button class="btn-primary" id="closerBuyBtn">Buy Ticket Now</button>
+    <button class="btn" id="closerBuy">Buy Ticket Now</button>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <span>MOUNTAIN SOUND</span>
-    <span>Mountain · River · Music · Community — Vang Vieng, Laos</span>
-  </div>
-</footer>
-
+<footer><div class="wrap"><span>MOUNTAIN SOUND</span><span>Mountain · River · Music · Community — Vang Vieng, Laos</span></div></footer>
 <button class="admin-trigger" id="adminTrigger">admin</button>
 
-<!-- ============ VIEW TICKET MODAL (design preview) ============ -->
-<div class="overlay" id="viewTicketOverlay">
+<div class="overlay" id="viewOverlay">
   <div class="modal wide">
-    <button class="modal-close" id="viewTicketClose" aria-label="Close">&times;</button>
-    <img src="images/ticket-design.jpg" alt="Full Mountain Sound event ticket" class="simple" style="width:100%;margin-bottom:18px;">
-    <button class="btn-block" id="viewTicketBuyBtn">Buy this ticket</button>
+    <button class="close" id="viewClose">&times;</button>
+    <img src="images/ticket-design.jpg" alt="Full Mountain Sound ticket" style="width:100%;margin-bottom:18px">
+    <button class="btn-block" id="viewBuy">Buy this ticket</button>
   </div>
 </div>
 
-<!-- ============ BUY FLOW MODAL ============ -->
 <div class="overlay" id="buyOverlay">
-  <div class="modal" id="buyModal">
-    <button class="modal-close" id="buyClose" aria-label="Close">&times;</button>
+  <div class="modal">
+    <button class="close" id="buyClose">&times;</button>
 
-    <!-- STEP 1: details form -->
-    <div class="step" id="step1">
+    <div id="step1">
       <div class="step-tag">Step 1 of 3</div>
       <h3>Your details</h3>
       <p class="sub">Tell us who's coming — this goes on your ticket.</p>
       <form id="detailsForm" novalidate>
-        <div class="field" id="nameField">
-          <label for="fullName">Full name</label>
-          <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="e.g. Somchai Vongsa">
-          <div class="field-error">Please enter your full name.</div>
-        </div>
-        <div class="field" id="nationalityField">
-          <label for="nationality">Nationality</label>
-          <input type="text" id="nationality" name="nationality" autocomplete="country-name" placeholder="e.g. Lao, French, Australian">
-          <div class="field-error">Please enter your nationality.</div>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-block">Continue to payment</button>
-        </div>
+        <div class="field" id="nameField"><label for="fullName">Full name</label><input id="fullName" placeholder="e.g. Somchai Vongsa"><div class="field-error">Please enter your full name.</div></div>
+        <div class="field" id="nationalityField"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Lao, French, Australian"><div class="field-error">Please enter your nationality.</div></div>
+        <button class="btn-block" type="submit">Continue to payment</button>
       </form>
     </div>
 
-    <!-- STEP 2: payment -->
-    <div class="step" id="step2" style="display:none;">
+    <div id="step2" style="display:none">
       <div class="step-tag">Step 2 of 3</div>
       <h3>Scan &amp; pay</h3>
       <p class="sub">Use your banking app to scan the Lao QR code below.</p>
-      <div class="order-summary">
-        <span>Ticket holder</span>
-        <strong id="summaryName">—</strong>
-      </div>
-      <div class="qr-box">
-        <img src="images/payment-qr.jpg" alt="BCEL / LAPNet payment QR code">
-        <div class="amount">150,000 KIP<small>Mountain Sound — one entry</small></div>
-      </div>
+      <div class="order-summary"><span>Ticket holder</span><strong id="summaryName">—</strong></div>
+      <div class="qr-box"><img src="images/payment-qr.jpg" alt="BCEL LAPNet payment QR code"><div class="amount">150,000 KIP<small>Mountain Sound — one entry</small></div></div>
       <p class="pay-note">After paying, tap the button below to confirm. If you need help, message us on WhatsApp at +856 20 5561 5282.</p>
-      <div class="form-actions">
-        <button class="btn-block" id="confirmPaidBtn"><span id="confirmSpinner" style="display:none;" class="spinner"></span><span id="confirmLabel">I've paid — confirm</span></button>
-        <button class="btn-block-ghost" id="backToStep1">Back</button>
-      </div>
+      <button class="btn-block" id="confirmPaid">I've paid — confirm</button>
+      <button class="btn-block-ghost" id="backStep1">Back</button>
     </div>
 
-    <!-- STEP 3: ticket ready -->
-    <div class="step" id="step3" style="display:none;">
+    <div id="step3" style="display:none">
       <div class="ticket-result">
-        <div class="success-tag">Payment confirmed</div>
-        <h3 style="margin-bottom:20px;">Your ticket is ready.</h3>
-        <div class="ticket-canvas-wrap">
-          <canvas id="ticketCanvas" width="1000" height="600"></canvas>
-        </div>
-        <button class="btn-block" id="sendWhatsAppBtn">Send to organizer via WhatsApp</button>
-        <button class="btn-block-ghost" id="downloadTicketBtn">Download ticket</button>
-        <button class="btn-block-ghost" id="closeAfterDownload">Done</button>
-        <p class="pay-note" style="margin-top:16px;">Tap "Send to organizer" so we have a record of your booking, then keep the downloaded ticket, or just your name, for entry. See you Sunday by the river.</p>
+        <div class="success">Payment confirmed</div>
+        <h3 style="margin-bottom:18px">Your ticket is ready.</h3>
+        <div class="ticket-canvas-wrap"><canvas id="ticketCanvas" width="1828" height="860"></canvas></div>
+        <button class="btn-block" id="sendWhatsApp">Send to organizer via WhatsApp</button>
+        <button class="btn-block-ghost" id="downloadTicket">Download ticket</button>
+        <button class="btn-block-ghost" id="done">Done</button>
+        <p class="pay-note" style="margin-top:15px">Tap “Send to organizer” so we have your booking record, then keep your ticket for entry.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ============ ADMIN MODAL ============ -->
 <div class="overlay" id="adminOverlay">
   <div class="modal">
-    <button class="modal-close" id="adminClose" aria-label="Close">&times;</button>
-    <div id="adminLoginView">
-      <div class="step-tag">Organizer</div>
-      <h3>Admin login</h3>
-      <p class="sub">Enter the passcode to view ticket orders.</p>
-      <div class="field" id="passcodeField">
-        <label for="passcode">Passcode</label>
-        <input type="password" id="passcode" autocomplete="off">
-        <div class="field-error">Incorrect passcode.</div>
-      </div>
+    <button class="close" id="adminClose">&times;</button>
+    <div id="adminLogin">
+      <div class="step-tag">Organizer</div><h3>Admin login</h3><p class="sub">Enter the passcode to view ticket orders.</p>
+      <div class="field" id="passField"><label for="passcode">Passcode</label><input type="password" id="passcode"><div class="field-error">Incorrect passcode.</div></div>
       <button class="btn-block" id="adminLoginBtn">View orders</button>
     </div>
-    <div id="adminOrdersView" style="display:none;">
-      <div class="step-tag">Organizer</div>
-      <h3>Ticket orders</h3>
-      <p class="sub">Stored on this device only.</p>
+    <div id="adminOrders" style="display:none">
+      <div class="step-tag">Organizer</div><h3>Ticket orders</h3><p class="sub">Stored on this device only.</p>
       <div id="ordersContent"></div>
     </div>
   </div>
@@ -402,313 +259,107 @@
 
 <script>
 (function(){
-  "use strict";
+"use strict";
+const $=id=>document.getElementById(id);
+const STORAGE_KEY="mountainSoundOrders";
+const ADMIN_PASSCODE="MountainSound2026";
+const ORGANIZER_WHATSAPP="8562055615282";
+let currentOrder={name:"",nationality:"",ticketNumber:"",date:""};
 
-  var STORAGE_KEY = "mountainSoundOrders";
-  var ADMIN_PASSCODE = "MountainSound2026";
+function openOverlay(el){el.classList.add("open");document.body.style.overflow="hidden"}
+function closeOverlay(el){el.classList.remove("open");document.body.style.overflow=""}
+document.querySelectorAll(".overlay").forEach(ov=>ov.addEventListener("click",e=>{if(e.target===ov)closeOverlay(ov)}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".overlay.open").forEach(closeOverlay)});
 
-  // Paste your Google Apps Script "Web app" URL here (ends in /exec).
-  // Until this is set, order counting only happens on-device as before.
-  var ORDERS_SHEET_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+function resetBuy(){
+  $("detailsForm").reset();
+  $("nameField").classList.remove("invalid");
+  $("nationalityField").classList.remove("invalid");
+  $("step1").style.display="block";$("step2").style.display="none";$("step3").style.display="none";
+}
+function startBuy(){resetBuy();openOverlay($("buyOverlay"))}
+["navBuy","heroBuy","ticketBuy","closerBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
 
-  function logOrderToSheet(order){
-    if (!ORDERS_SHEET_URL || ORDERS_SHEET_URL.indexOf("PASTE_YOUR") === 0) return;
-    try{
-      fetch(ORDERS_SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({
-          name: order.name,
-          nationality: order.nationality,
-          ticketNumber: order.ticketNumber
-        })
-      });
-    }catch(e){
-      // Silently ignore — the local order record still saves either way.
-    }
+$("viewTicket").addEventListener("click",()=>openOverlay($("viewOverlay")));
+$("viewClose").addEventListener("click",()=>closeOverlay($("viewOverlay")));
+$("viewBuy").addEventListener("click",()=>{closeOverlay($("viewOverlay"));startBuy()});
+$("buyClose").addEventListener("click",()=>closeOverlay($("buyOverlay")));
+$("backStep1").addEventListener("click",()=>{$("step2").style.display="none";$("step1").style.display="block"});
+
+$("detailsForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("fullName").value.trim(), nationality=$("nationality").value.trim();
+  let valid=true;
+  $("nameField").classList.toggle("invalid",name.length<2);
+  $("nationalityField").classList.toggle("invalid",nationality.length<2);
+  if(name.length<2||nationality.length<2)return;
+  currentOrder.name=name;currentOrder.nationality=nationality;
+  $("summaryName").textContent=name;
+  $("step1").style.display="none";$("step2").style.display="block";
+});
+
+function generateTicketNumber(){
+  const d=new Date(), datePart=String(d.getFullYear()).slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
+  return "MS-"+datePart+"-"+Math.floor(1000+Math.random()*9000);
+}
+function saveOrder(o){
+  let orders=[];try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){}
+  orders.push(o);localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
+}
+
+$("confirmPaid").addEventListener("click",()=>{
+  const btn=$("confirmPaid");btn.disabled=true;btn.textContent="Preparing ticket…";
+  setTimeout(()=>{
+    currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
+    saveOrder({...currentOrder});
+    drawTicket(currentOrder);
+    $("step2").style.display="none";$("step3").style.display="block";
+    btn.disabled=false;btn.textContent="I've paid — confirm";
+  },700);
+});
+
+function drawTicket(order){
+  const canvas=$("ticketCanvas"),ctx=canvas.getContext("2d"),img=new Image();
+  img.onload=()=>{
+    canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;ctx.drawImage(img,0,0);
+    const nameBox={x1:.800,x2:.980,y1:.586,y2:.662},numBox={x1:.800,x2:.980,y1:.740,y2:.815};
+    drawText(order.name,nameBox);drawText(order.ticketNumber,numBox);
+  };
+  img.onerror=()=>{ctx.fillStyle="#11130e";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#e3aa4c";ctx.font="bold 42px Arial";ctx.fillText("MOUNTAIN SOUND",60,90)};
+  img.src="images/ticket-design.jpg";
+  function drawText(text,b){
+    const x1=b.x1*canvas.width,x2=b.x2*canvas.width,y1=b.y1*canvas.height,y2=b.y2*canvas.height;
+    const bw=x2-x1,bh=y2-y1,pad=bw*.07,max=bw-pad*2;let size=bh*.46;
+    ctx.textBaseline="middle";ctx.textAlign="left";ctx.fillStyle="#20200f";ctx.font="600 "+size+"px Arial";
+    while(ctx.measureText(text).width>max&&size>10){size-=1;ctx.font="600 "+size+"px Arial"}
+    ctx.fillText(text,x1+pad,y1+bh/2+size*.03);
   }
+}
 
-  function $(id){ return document.getElementById(id); }
-  function qsa(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+$("sendWhatsApp").addEventListener("click",()=>{
+  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
+  const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
+  window.open(web,"_blank","noopener,noreferrer");
+});
+$("downloadTicket").addEventListener("click",()=>{
+  const a=document.createElement("a");a.download="mountain-sound-ticket-"+currentOrder.ticketNumber+".png";
+  try{a.href=$("ticketCanvas").toDataURL("image/png");a.click()}catch(e){alert("Please take a screenshot of your ticket and send it to us on WhatsApp.")}
+});
+$("done").addEventListener("click",()=>closeOverlay($("buyOverlay")));
 
-  /* ---------------- generic overlay open/close ---------------- */
-  function openOverlay(el){ el.classList.add("open"); document.body.style.overflow="hidden"; }
-  function closeOverlay(el){ el.classList.remove("open"); document.body.style.overflow=""; }
-
-  qsa(".overlay").forEach(function(ov){
-    ov.addEventListener("click", function(e){
-      if(e.target === ov) closeOverlay(ov);
-    });
-  });
-  document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
-      qsa(".overlay.open").forEach(closeOverlay);
-    }
-  });
-
-  /* ---------------- view ticket design modal ---------------- */
-  var viewTicketOverlay = $("viewTicketOverlay");
-  $("viewTicketBtn").addEventListener("click", function(){ openOverlay(viewTicketOverlay); });
-  $("viewTicketClose").addEventListener("click", function(){ closeOverlay(viewTicketOverlay); });
-  $("viewTicketBuyBtn").addEventListener("click", function(){
-    closeOverlay(viewTicketOverlay);
-    startBuyFlow();
-  });
-
-  /* ---------------- buy flow ---------------- */
-  var buyOverlay = $("buyOverlay");
-  var step1 = $("step1"), step2 = $("step2"), step3 = $("step3");
-  var currentOrder = { name:"", nationality:"", ticketNumber:"", date:"" };
-
-  function showStep(step){
-    [step1, step2, step3].forEach(function(s){ s.style.display = "none"; });
-    step.style.display = "block";
-    buyOverlay.querySelector(".modal").scrollTop = 0;
-  }
-
-  function resetForm(){
-    $("detailsForm").reset();
-    qsa("#buyModal .field").forEach(function(f){ f.classList.remove("invalid"); });
-    showStep(step1);
-  }
-
-  function startBuyFlow(){
-    resetForm();
-    openOverlay(buyOverlay);
-  }
-
-  ["navBuyBtn","heroBuyBtn","ticketSectionBuyBtn","closerBuyBtn"].forEach(function(id){
-    $(id).addEventListener("click", startBuyFlow);
-  });
-  $("buyClose").addEventListener("click", function(){ closeOverlay(buyOverlay); });
-
-  $("detailsForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    var name = $("fullName").value.trim();
-    var nationality = $("nationality").value.trim();
-    var valid = true;
-
-    if(name.length < 2){
-      $("nameField").classList.add("invalid"); valid = false;
-    } else {
-      $("nameField").classList.remove("invalid");
-    }
-    if(nationality.length < 2){
-      $("nationalityField").classList.add("invalid"); valid = false;
-    } else {
-      $("nationalityField").classList.remove("invalid");
-    }
-    if(!valid) return;
-
-    currentOrder.name = name;
-    currentOrder.nationality = nationality;
-    $("summaryName").textContent = name;
-    showStep(step2);
-  });
-
-  $("backToStep1").addEventListener("click", function(){ showStep(step1); });
-
-  function generateTicketNumber(){
-    var d = new Date();
-    var datePart = d.getFullYear().toString().slice(-2) +
-                   String(d.getMonth()+1).padStart(2,"0") +
-                   String(d.getDate()).padStart(2,"0");
-    var rand = Math.floor(1000 + Math.random()*9000);
-    return "MS-" + datePart + "-" + rand;
-  }
-
-  function saveOrder(order){
-    var orders = [];
-    try{ orders = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ orders = []; }
-    orders.push(order);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
-  }
-
-  $("confirmPaidBtn").addEventListener("click", function(){
-    var btn = this;
-    if(btn.disabled) return;
-    btn.disabled = true;
-    $("confirmSpinner").style.display = "inline-block";
-    $("confirmLabel").textContent = "Confirming…";
-
-    setTimeout(function(){
-      currentOrder.ticketNumber = generateTicketNumber();
-      currentOrder.date = new Date().toISOString();
-      saveOrder({
-        name: currentOrder.name,
-        nationality: currentOrder.nationality,
-        ticketNumber: currentOrder.ticketNumber,
-        date: currentOrder.date
-      });
-      logOrderToSheet(currentOrder);
-      drawTicket(currentOrder);
-      showStep(step3);
-
-      btn.disabled = false;
-      $("confirmSpinner").style.display = "none";
-      $("confirmLabel").textContent = "I've paid — confirm";
-    }, 900);
-  });
-
-  $("closeAfterDownload").addEventListener("click", function(){ closeOverlay(buyOverlay); });
-
-  var ORGANIZER_WHATSAPP = "8562055615282";
-
-  function sendTicketToWhatsApp(){
-    var lines = [
-      "Mountain Sound ticket confirmation",
-      "Name: " + currentOrder.name,
-      "Nationality: " + currentOrder.nationality,
-      "Ticket No: " + currentOrder.ticketNumber
-    ];
-    var text = encodeURIComponent(lines.join("\n"));
-    var appUrl = "whatsapp://send?phone=" + ORGANIZER_WHATSAPP + "&text=" + text;
-    var webUrl = "https://web.whatsapp.com/send?phone=" + ORGANIZER_WHATSAPP + "&text=" + text;
-    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      // Open the WhatsApp app directly on phones/tablets.
-      window.location.href = appUrl;
-      // If WhatsApp is not installed, fall back to WhatsApp Web.
-      setTimeout(function(){
-        window.location.href = webUrl;
-      }, 1800);
-    } else {
-      // On a computer, open the organizer's chat directly in WhatsApp Web.
-      window.open(webUrl, "_blank", "noopener,noreferrer");
-    }
-  }
-
-  $("sendWhatsAppBtn").addEventListener("click", sendTicketToWhatsApp);
-
-  /* ---------------- ticket canvas rendering ---------------- */
-  function drawTicket(order){
-    var canvas = $("ticketCanvas");
-    var ctx = canvas.getContext("2d");
-    var img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = function(){
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      paintOverlay(ctx, canvas, order);
-    };
-    img.onerror = function(){
-      // fall back to a plain ticket panel if ticket-design.jpg can't be read
-      canvas.width = 1000; canvas.height = 600;
-      ctx.fillStyle = "#15150f";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-      ctx.strokeStyle = "#e2a84b";
-      ctx.lineWidth = 3;
-      ctx.strokeRect(20,20,canvas.width-40,canvas.height-40);
-      ctx.fillStyle = "#e2a84b";
-      ctx.font = "600 22px 'Avenir Next', sans-serif";
-      ctx.fillText("MOUNTAIN SOUND", 60, 90);
-      paintOverlay(ctx, canvas, order);
-    };
-    img.src = "images/ticket-design.jpg";
-  }
-
-  /*
-   * These fractions target the two blank white boxes printed on the
-   * ticket stub ("CUSTOMER NAME" and "TICKET No."). They're measured
-   * from the actual Ticket.png artwork, as fractions of the full
-   * image width/height, so they still line up correctly even if the
-   * canvas is scaled to a different pixel size.
-   */
-  var NAME_BOX   = { x1:0.800, x2:0.980, y1:0.586, y2:0.662 };
-  var TICKET_BOX = { x1:0.800, x2:0.980, y1:0.740, y2:0.815 };
-
-  function paintOverlay(ctx, canvas, order){
-    var w = canvas.width, h = canvas.height;
-    drawFieldText(ctx, order.name, toPixelBox(NAME_BOX, w, h));
-    drawFieldText(ctx, order.ticketNumber, toPixelBox(TICKET_BOX, w, h));
-  }
-
-  function toPixelBox(box, w, h){
-    return { x1: box.x1*w, x2: box.x2*w, y1: box.y1*h, y2: box.y2*h };
-  }
-
-  function drawFieldText(ctx, text, box){
-    var boxW = box.x2 - box.x1;
-    var boxH = box.y2 - box.y1;
-    var padX = boxW * 0.07;
-    var maxWidth = boxW - padX*2;
-    var fontSize = boxH * 0.46;
-
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
-    ctx.fillStyle = "#20200f";
-    ctx.font = "600 " + fontSize + "px 'Avenir Next', Arial, sans-serif";
-
-    // shrink the text so long names/numbers still fit inside the box
-    while (ctx.measureText(text).width > maxWidth && fontSize > 10){
-      fontSize -= 1;
-      ctx.font = "600 " + fontSize + "px 'Avenir Next', Arial, sans-serif";
-    }
-
-    var cy = box.y1 + boxH/2;
-    ctx.fillText(text, box.x1 + padX, cy + fontSize*0.03);
-  }
-
-  $("downloadTicketBtn").addEventListener("click", function(){
-    var canvas = $("ticketCanvas");
-    var link = document.createElement("a");
-    link.download = "mountain-sound-ticket-" + currentOrder.ticketNumber + ".png";
-    try{
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    }catch(e){
-      alert("Couldn't prepare the download automatically. Take a screenshot of the ticket above, or contact us on WhatsApp with your ticket number " + currentOrder.ticketNumber + ".");
-    }
-  });
-
-  /* ---------------- admin ---------------- */
-  var adminOverlay = $("adminOverlay");
-  $("adminTrigger").addEventListener("click", function(){
-    $("adminLoginView").style.display = "block";
-    $("adminOrdersView").style.display = "none";
-    $("passcode").value = "";
-    $("passcodeField").classList.remove("invalid");
-    openOverlay(adminOverlay);
-  });
-  $("adminClose").addEventListener("click", function(){ closeOverlay(adminOverlay); });
-
-  $("adminLoginBtn").addEventListener("click", function(){
-    var val = $("passcode").value;
-    if(val === ADMIN_PASSCODE){
-      renderOrders();
-      $("adminLoginView").style.display = "none";
-      $("adminOrdersView").style.display = "block";
-    } else {
-      $("passcodeField").classList.add("invalid");
-    }
-  });
-
-  function renderOrders(){
-    var orders = [];
-    try{ orders = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }catch(e){ orders = []; }
-    var content = $("ordersContent");
-    if(orders.length === 0){
-      content.innerHTML = '<p class="empty-note">No ticket orders on this device yet.</p>';
-      return;
-    }
-    var rows = orders.slice().reverse().map(function(o){
-      var d = new Date(o.date);
-      var dateStr = isNaN(d) ? "—" : d.toLocaleString();
-      return "<tr><td>"+escapeHtml(o.ticketNumber)+"</td><td>"+escapeHtml(o.name)+"</td><td>"+escapeHtml(o.nationality)+"</td><td>"+dateStr+"</td></tr>";
-    }).join("");
-    content.innerHTML =
-      '<table class="orders-table"><thead><tr><th>Ticket No.</th><th>Name</th><th>Nationality</th><th>When</th></tr></thead><tbody>'+rows+'</tbody></table>';
-  }
-
-  function escapeHtml(str){
-    var div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  }
-
+$("adminTrigger").addEventListener("click",()=>{ $("adminLogin").style.display="block";$("adminOrders").style.display="none";$("passcode").value="";openOverlay($("adminOverlay"))});
+$("adminClose").addEventListener("click",()=>closeOverlay($("adminOverlay")));
+$("adminLoginBtn").addEventListener("click",()=>{
+  if($("passcode").value===ADMIN_PASSCODE){renderOrders();$("adminLogin").style.display="none";$("adminOrders").style.display="block"}
+  else $("passField").classList.add("invalid");
+});
+function renderOrders(){
+  let orders=[];try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){}
+  if(!orders.length){$("ordersContent").innerHTML='<p class="empty">No ticket orders on this device yet.</p>';return}
+  const rows=orders.slice().reverse().map(o=>"<tr><td>"+esc(o.ticketNumber)+"</td><td>"+esc(o.name)+"</td><td>"+esc(o.nationality)+"</td><td>"+new Date(o.date).toLocaleString()+"</td></tr>").join("");
+  $("ordersContent").innerHTML='<table class="orders-table"><thead><tr><th>Ticket</th><th>Name</th><th>Nationality</th><th>When</th></tr></thead><tbody>'+rows+"</tbody></table>";
+}
+function esc(s){const d=document.createElement("div");d.textContent=s;return d.innerHTML}
 })();
 </script>
 </body>
