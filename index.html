@@ -7,7 +7,7 @@
 <meta name="description" content="Mountain Sound — Sunday daytime party by the riverside in Vang Vieng, Laos. Nature, music, community and sunset.">
 <meta property="og:title" content="Mountain Sound — Daytime Party Series">
 <meta property="og:description" content="Every Sunday, 1PM to sunset, riverside in Vang Vieng.">
-<meta property="og:image" content="images/hero.jpg">
+<meta property="og:image" content="images/Hero.jpg.png">
 <meta name="theme-color" content="#11130e">
 <style>
 :root{--bg:#11130e;--panel:#1a1c15;--cream:#f5f0e4;--muted:#c6c0b1;--gold:#e3aa4c;--line:#35372c;--river:#77a99e;--danger:#d96b52}
@@ -105,6 +105,42 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
  .modal{padding:28px 20px}
 }
 
+.gallery-section{background:#11130e}
+.gallery-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}
+.gallery-note{max-width:420px;color:var(--muted);font:13px/1.7 "Avenir Next","Helvetica Neue",Arial,sans-serif}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:12px}
+.gallery-item{position:relative;overflow:hidden;border:1px solid var(--line);background:#0b0d09;cursor:pointer;min-height:0}
+.gallery-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery-item:nth-child(2){grid-column:span 2}
+.gallery-item:nth-child(7){grid-column:span 2}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease,filter .45s ease}
+.gallery-item:after{content:"View photo";position:absolute;left:14px;bottom:12px;padding:6px 9px;background:rgba(10,12,8,.72);color:#f5f0e4;font:600 10px "Avenir Next","Helvetica Neue",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:0;transition:opacity .25s ease}
+.gallery-item:hover img{transform:scale(1.04);filter:brightness(.88)}
+.gallery-item:hover:after{opacity:1}
+.gallery-lightbox{position:fixed;inset:0;background:rgba(4,6,3,.94);z-index:120;display:none;align-items:center;justify-content:center;padding:28px}
+.gallery-lightbox.open{display:flex}
+.gallery-lightbox-inner{position:relative;width:min(1100px,100%);max-height:92vh;display:flex;align-items:center;justify-content:center}
+.gallery-lightbox img{max-width:100%;max-height:84vh;width:auto;height:auto;object-fit:contain;border:1px solid var(--line)}
+.gallery-close,.gallery-prev,.gallery-next{position:absolute;border:1px solid var(--line);background:rgba(13,15,11,.82);color:var(--cream);width:44px;height:44px;display:flex;align-items:center;justify-content:center;font:24px Arial,sans-serif}
+.gallery-close{top:-12px;right:-12px;border-radius:50%;z-index:2}
+.gallery-prev{left:12px;top:50%;transform:translateY(-50%)}
+.gallery-next{right:12px;top:50%;transform:translateY(-50%)}
+.gallery-caption{position:absolute;left:50%;bottom:-8px;transform:translate(-50%,100%);color:var(--muted);font:12px "Avenir Next","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;text-align:center;white-space:nowrap}
+@media(max-width:800px){
+ .gallery-head{display:block}.gallery-note{margin-top:16px}
+ .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px;gap:10px}
+ .gallery-item:nth-child(1),.gallery-item:nth-child(2),.gallery-item:nth-child(7){grid-column:span 2}
+}
+@media(max-width:520px){
+ .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:130px;gap:8px}
+ .gallery-item:nth-child(1){grid-row:span 2}
+ .gallery-item:after{display:none}
+ .gallery-lightbox{padding:14px}
+ .gallery-lightbox img{max-height:78vh}
+ .gallery-close{top:4px;right:4px}.gallery-prev{left:4px}.gallery-next{right:4px}
+ .gallery-caption{bottom:-3px;font-size:10px}
+}
+
 .countdown-section{background:#0d0f0b;padding:88px 0 92px;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .countdown-kicker{font:600 12px "Avenir Next","Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
 .countdown-title{font-size:clamp(30px,5vw,54px);font-weight:400;line-height:1.05;margin-bottom:32px}
@@ -132,6 +168,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
   <nav>
     <a href="#experience">Experience</a>
     <a href="#details">Details</a>
+    <a href="#gallery">Gallery</a>
     <a href="#tickets">Ticket</a>
     <button class="btn nav-buy" id="navBuy">Buy Ticket</button>
   </nav>
@@ -183,11 +220,36 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <div class="contact">WhatsApp: <a href="https://wa.me/8562055615282">+856 20 5561 5282</a></div>
     </div>
     <div class="poster">
-      <img src="images/hero.jpg" alt="Mountain Sound daytime party">
+      <img src="images/Hero.jpg.png" alt="Mountain Sound daytime party">
     </div>
   </div>
 </section>
 
+
+<section id="gallery" class="gallery-section">
+  <div class="wrap">
+    <div class="gallery-head">
+      <div>
+        <div class="eyebrow">Real place · real moments</div>
+        <h2>Moments at Mountain Sound.</h2>
+      </div>
+      <p class="gallery-note">A glimpse of the riverside, bamboo spaces, mountains and people that make Sundays at Mountain Sound special.</p>
+    </div>
+
+    <div class="gallery-grid" aria-label="Mountain Sound photo gallery">
+      <button class="gallery-item" type="button" data-gallery-index="0" aria-label="View riverside Mountain Sound photo"><img src="images/gallery/gallery-01.jpg" alt="Mountain Sound riverside hut and mountain view" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="1" aria-label="View bamboo café photo"><img src="images/gallery/gallery-02.jpg" alt="Mountain Sound bamboo café by the river" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="2" aria-label="View riverside hut photo"><img src="images/gallery/gallery-03.jpg" alt="Riverside bamboo hut at Mountain Sound" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="3" aria-label="View river platform photo"><img src="images/gallery/gallery-04.jpg" alt="Riverside platform and mountain scenery" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="4" aria-label="View music photo"><img src="images/gallery/gallery-05.jpg" alt="Music and relaxed riverside atmosphere" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="5" aria-label="View treehouse photo"><img src="images/gallery/gallery-06.jpg" alt="Bamboo tree platform overlooking the river" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="6" aria-label="View mountain photo"><img src="images/gallery/gallery-07.jpg" alt="Misty Vang Vieng limestone mountains" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="7" aria-label="View sunset riverside photo"><img src="images/gallery/gallery-08.jpg" alt="Golden riverside view at Mountain Sound" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="8" aria-label="View river landscape photo"><img src="images/gallery/gallery-09.jpg" alt="Nam Song riverside landscape and mountains" loading="lazy"></button>
+      <button class="gallery-item" type="button" data-gallery-index="9" aria-label="View green landscape photo"><img src="images/gallery/gallery-10.jpg" alt="Green Mountain Sound landscape beneath the mountains" loading="lazy"></button>
+    </div>
+  </div>
+</section>
 
 <section class="countdown-section" id="countdown">
   <div class="wrap">
@@ -251,6 +313,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
     <button class="close" id="viewClose">&times;</button>
     <img src="images/ticket-design.jpg" alt="Full Mountain Sound ticket" style="width:100%;margin-bottom:18px">
     <button class="btn-block" id="viewBuy">Buy this ticket</button>
+  </div>
+</div>
+
+
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Mountain Sound photo viewer">
+  <div class="gallery-lightbox-inner">
+    <button class="gallery-close" id="galleryClose" type="button" aria-label="Close photo viewer">&times;</button>
+    <button class="gallery-prev" id="galleryPrev" type="button" aria-label="Previous photo">&#8249;</button>
+    <img id="galleryLightboxImage" src="" alt="">
+    <button class="gallery-next" id="galleryNext" type="button" aria-label="Next photo">&#8250;</button>
+    <div class="gallery-caption" id="galleryCaption"></div>
   </div>
 </div>
 
@@ -467,6 +540,49 @@ function esc(s){const d=document.createElement("div");d.textContent=s;return d.i
       ticketBuy.click();
     });
   }
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var galleryItems = Array.prototype.slice.call(document.querySelectorAll(".gallery-item"));
+  var lightbox = document.getElementById("galleryLightbox");
+  var lightboxImage = document.getElementById("galleryLightboxImage");
+  var caption = document.getElementById("galleryCaption");
+  var currentIndex = 0;
+  var galleryData = galleryItems.map(function(item){
+    var img = item.querySelector("img");
+    return {src:img.getAttribute("src"), alt:img.getAttribute("alt")};
+  });
+
+  function showPhoto(index){
+    if(!galleryData.length) return;
+    currentIndex = (index + galleryData.length) % galleryData.length;
+    lightboxImage.src = galleryData[currentIndex].src;
+    lightboxImage.alt = galleryData[currentIndex].alt;
+    caption.textContent = (currentIndex + 1) + " / " + galleryData.length;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeGallery(){
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+    lightboxImage.src = "";
+  }
+  galleryItems.forEach(function(item,index){
+    item.addEventListener("click",function(){showPhoto(index);});
+  });
+  document.getElementById("galleryClose").addEventListener("click",closeGallery);
+  document.getElementById("galleryPrev").addEventListener("click",function(){showPhoto(currentIndex-1);});
+  document.getElementById("galleryNext").addEventListener("click",function(){showPhoto(currentIndex+1);});
+  lightbox.addEventListener("click",function(e){if(e.target===lightbox) closeGallery();});
+  document.addEventListener("keydown",function(e){
+    if(!lightbox.classList.contains("open")) return;
+    if(e.key==="Escape") closeGallery();
+    if(e.key==="ArrowLeft") showPhoto(currentIndex-1);
+    if(e.key==="ArrowRight") showPhoto(currentIndex+1);
+  });
 })();
 </script>
 
