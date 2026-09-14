@@ -29,7 +29,7 @@ nav a{color:#e6e0d3}
 .hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:#111}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.15),transparent 45%,rgba(8,10,6,.88) 100%);z-index:1}
-.hero-content{position:relative;z-index:2;width:100%;padding:0 28px 58px;display:none}
+.hero-content{position:relative;z-index:2;width:100%;padding:0 28px 58px}
 .hero-kicker{font:600 12px "Avenir Next",Arial,sans-serif;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
 .hero h1{font-size:clamp(38px,6vw,72px);font-weight:400;line-height:1.02;max-width:720px;margin-bottom:16px}
 .hero p{max-width:600px;color:var(--muted);font-size:18px;margin-bottom:25px}
@@ -92,51 +92,144 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .orders-table{width:100%;border-collapse:collapse;font:12px "Avenir Next",Arial,sans-serif}
 .orders-table th,.orders-table td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
 .empty{font:13px "Avenir Next",Arial,sans-serif;color:var(--muted)}
-/* Mobile improvements */
 @media(max-width:800px){
-  header{padding:14px 16px}
-  nav{gap:8px}
-  nav a{display:none}
-  nav a.nav-buy{display:inline-block}
-  .brand{font-size:13px;letter-spacing:.12em}
-  .hero{min-height:78vh}
-  .hero>img{object-position:center}
-  .hero-content{display:none}
-  .features,.details,.ticket-grid{grid-template-columns:1fr;gap:30px}
-  .facts{grid-template-columns:1fr 1fr;gap:22px 16px}
-  section{padding:72px 0}
-  .poster{max-width:620px;margin:0 auto}
-  .ticket-grid{align-items:stretch}
-  .ticket-card{max-width:620px;margin:auto}
-  .ticket-grid .lead{font-size:16px}
-  .btn,.btn-block{min-height:48px}
-  .modal{max-height:92vh}
+ nav a:not(.nav-buy){display:none}
+ .hero-content{padding-bottom:40px}
+ .features,.details,.ticket-grid{grid-template-columns:1fr;gap:36px}
+ .facts{grid-template-columns:1fr 1fr}
+ section{padding:80px 0}
 }
 @media(max-width:520px){
-  .wrap{padding:0 16px}
-  header{padding:12px 14px}
-  .hero{min-height:70vh}
-  .facts{grid-template-columns:1fr}
-  .fact dd{font-size:17px}
-  .poster{padding:6px}
-  .ticket-card{padding:6px}
-  .closer{padding:90px 0}
-  .modal{padding:26px 17px}
-  .modal h3{font-size:23px}
-  .field input{font-size:16px}
-  .btn-block,.btn-block-ghost{min-height:50px}
+ header{padding:15px 16px}.wrap{padding:0 18px}.hero-content{padding-left:18px;padding-right:18px}
+ .hero p{font-size:16px}.facts{grid-template-columns:1fr}
+ .modal{padding:28px 20px}
 }
+
+/* =========================================
+   MOUNTAIN SOUND — TICKET COUNTDOWN
+   Automatically counts down to the next Sunday at 1PM (GMT+7).
+   ========================================= */
+
+.ticket-countdown{
+  background:#f5f0e4;
+  color:#20231a;
+  padding:88px 20px 92px;
+  border-top:1px solid #d8d1c2;
+  border-bottom:1px solid #d8d1c2;
+  text-align:center;
+}
+
+.countdown-wrap{
+  max-width:1120px;
+  margin:0 auto;
+}
+
+.countdown-eyebrow{
+  font:600 12px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#697064;
+  margin-bottom:14px;
+}
+
+.countdown-title{
+  font-size:clamp(30px,4vw,48px);
+  font-weight:400;
+  line-height:1.1;
+  margin-bottom:48px;
+}
+
+.countdown-timer{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:clamp(8px,2.7vw,34px);
+}
+
+.countdown-unit{
+  min-width:125px;
+}
+
+.countdown-number{
+  display:block;
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(58px,8.5vw,104px);
+  font-weight:300;
+  line-height:.9;
+  letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;
+}
+
+.countdown-unit small{
+  display:block;
+  margin-top:17px;
+  font:500 11px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.16em;
+  color:#697064;
+}
+
+.countdown-separator{
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(48px,7vw,82px);
+  font-weight:300;
+  line-height:.82;
+  color:#7c8076;
+}
+
+.countdown-date{
+  margin-top:48px;
+  font:600 14px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.countdown-info{
+  margin-top:11px;
+  font:12px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.12em;
+  color:#697064;
+  text-transform:uppercase;
+}
+
+.countdown-open{
+  margin-top:26px;
+}
+
+.countdown-open .btn{
+  display:inline-block;
+}
+
+@media(max-width:800px){
+  .ticket-countdown{padding:72px 18px 76px}
+  .countdown-unit{min-width:82px}
+  .countdown-timer{gap:7px}
+}
+
+@media(max-width:520px){
+  .ticket-countdown{padding:60px 10px 64px}
+  .countdown-eyebrow{font-size:10px}
+  .countdown-title{font-size:28px;margin-bottom:32px}
+  .countdown-timer{gap:3px}
+  .countdown-unit{min-width:64px}
+  .countdown-number{font-size:39px;letter-spacing:-.04em}
+  .countdown-unit small{
+    margin-top:10px;
+    font-size:7px;
+    letter-spacing:.08em;
+  }
+  .countdown-separator{
+    font-size:32px;
+    margin-top:-2px;
+  }
+  .countdown-date{
+    margin-top:31px;
+    font-size:10px;
+    line-height:1.6;
+  }
+  .countdown-info{font-size:9px;line-height:1.5}
+}
+
 </style>
-
-<!-- Google Analytics: replace G-QEEZV8TTRB with your real Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEEZV8TTRB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QEEZV8TTRB');
-</script>
-
 </head>
 <body>
 <header>
@@ -195,7 +288,51 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <div class="contact">WhatsApp: <a href="https://wa.me/8562055615282">+856 20 5561 5282</a></div>
     </div>
     <div class="poster">
-      <img src="images/poster.png" alt="Mountain Sound Sunday Daytime Party poster">
+      <img src="images/hero.jpg" alt="Mountain Sound daytime party">
+    </div>
+  </div>
+</section>
+
+
+<!-- TICKET COUNTDOWN -->
+<section class="ticket-countdown" id="ticketCountdown">
+  <div class="countdown-wrap">
+    <div class="countdown-eyebrow">Next Mountain Sound</div>
+    <div class="countdown-title" id="countdownTitle">THE NEXT SUNDAY BEGINS IN</div>
+
+    <div class="countdown-timer" aria-label="Countdown to the next Mountain Sound event">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countDays">00</span>
+        <small>DAYS</small>
+      </div>
+
+      <div class="countdown-separator">:</div>
+
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countHours">00</span>
+        <small>HOURS</small>
+      </div>
+
+      <div class="countdown-separator">:</div>
+
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countMinutes">00</span>
+        <small>MINUTES</small>
+      </div>
+
+      <div class="countdown-separator">:</div>
+
+      <div class="countdown-unit">
+        <span class="countdown-number" id="countSeconds">00</span>
+        <small>SECONDS</small>
+      </div>
+    </div>
+
+    <div class="countdown-date" id="countdownDate">SUNDAY · 1PM — SUNSET</div>
+    <div class="countdown-info">150,000 KIP · LIMITED CAPACITY</div>
+
+    <div class="countdown-open">
+      <button class="btn" id="countdownBuy">BUY TICKET</button>
     </div>
   </div>
 </section>
@@ -245,10 +382,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <form id="detailsForm" novalidate>
         <div class="field" id="nameField"><label for="fullName">Full name</label><input id="fullName" placeholder="e.g. Somchai Vongsa"><div class="field-error">Please enter your full name.</div></div>
         <div class="field" id="nationalityField"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Lao, French, Australian"><div class="field-error">Please enter your nationality.</div></div>
-        <div class="field"><label for="customerWhatsApp">WhatsApp number</label><input id="customerWhatsApp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+856 20 1234 5678" required></div>
         <button class="btn-block" type="submit">Continue to payment</button>
       </form>
     </div>
+
     <div id="step2" style="display:none">
       <div class="step-tag">Step 2 of 3</div>
       <h3>Scan &amp; pay</h3>
@@ -283,7 +420,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <button class="btn-block" id="adminLoginBtn">View orders</button>
     </div>
     <div id="adminOrders" style="display:none">
-      <div class="step-tag">Organizer</div><h3>Ticket orders</h3><p class="sub">Orders are stored on this device and can also sync to your online order database when connected.</p>
+      <div class="step-tag">Organizer</div><h3>Ticket orders</h3><p class="sub">Stored on this device only.</p>
       <div id="ordersContent"></div>
     </div>
   </div>
@@ -295,7 +432,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 const $=id=>document.getElementById(id);
 const STORAGE_KEY="mountainSoundOrders";
 const ADMIN_PASSCODE="MountainSound2026";
-const ORDER_API_URL="https://script.google.com/macros/s/AKfycbzbSUU-IcoUkNt4b0MLJu6NPXiTAEve61E0YkrCOCWhD3P8BjyE5zDYPy9sswobufBJ/exec";
 const ORGANIZER_WHATSAPP="8562055615282";
 let currentOrder={name:"",nationality:"",ticketNumber:"",date:""};
 
@@ -310,18 +446,7 @@ function resetBuy(){
   $("nationalityField").classList.remove("invalid");
   $("step1").style.display="block";$("step2").style.display="none";$("step3").style.display="none";
 }
-function trackEvent(name,params){
-  try{if(typeof gtag==="function")gtag("event",name,params||{})}catch(e){}
-}
-function startBuy(){
-  trackEvent("buy_ticket",{
-    currency:"LAK",
-    value:150000,
-    item_name:"Mountain Sound Daytime Party Ticket"
-  });
-  resetBuy();
-  openOverlay($("buyOverlay"));
-}
+function startBuy(){resetBuy();openOverlay($("buyOverlay"))}
 ["navBuy","heroBuy","ticketBuy","closerBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
 
 $("viewTicket").addEventListener("click",()=>openOverlay($("viewOverlay")));
@@ -337,18 +462,7 @@ $("detailsForm").addEventListener("submit",e=>{
   $("nameField").classList.toggle("invalid",name.length<2);
   $("nationalityField").classList.toggle("invalid",nationality.length<2);
   if(name.length<2||nationality.length<2)return;
- const customerWhatsApp=$("customerWhatsApp").value.trim();currentOrder.name=name;currentOrder.nationality=nationality;currentOrder.customerWhatsApp=customerWhatsApp;
-;
-  trackEvent("begin_checkout",{
-    currency:"LAK",
-    value:150000,
-    items:[{
-      item_id:"MS-DAYTIME-150K",
-      item_name:"Mountain Sound Daytime Party Ticket",
-      price:150000,
-      quantity:1
-    }]
-  });
+  currentOrder.name=name;currentOrder.nationality=nationality;
   $("summaryName").textContent=name;
   $("step1").style.display="none";$("step2").style.display="block";
 });
@@ -357,22 +471,9 @@ function generateTicketNumber(){
   const d=new Date(), datePart=String(d.getFullYear()).slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
   return "MS-"+datePart+"-"+Math.floor(1000+Math.random()*9000);
 }
-async function saveOrder(o){
+function saveOrder(o){
   let orders=[];try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){}
   orders.push(o);localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
-
-  if(ORDER_API_URL && !ORDER_API_URL.includes("PASTE_GOOGLE_APPS_SCRIPT")){
-    try{
-      await fetch(ORDER_API_URL,{
-        method:"POST",
-        mode:"no-cors",
-        headers:{"Content-Type":"text/plain;charset=utf-8"},
-        body:JSON.stringify(o)
-      });
-    }catch(e){
-      console.warn("Online order sync failed; local copy retained.",e);
-    }
-  }
 }
 
 $("confirmPaid").addEventListener("click",()=>{
@@ -380,12 +481,6 @@ $("confirmPaid").addEventListener("click",()=>{
   setTimeout(()=>{
     currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
     saveOrder({...currentOrder});
-    trackEvent("ticket_generated",{
-      ticket_number:currentOrder.ticketNumber,
-      currency:"LAK",
-      value:150000,
-      item_name:"Mountain Sound Daytime Party Ticket"
-    });
     drawTicket(currentOrder);
     $("step2").style.display="none";$("step3").style.display="block";
     btn.disabled=false;btn.textContent="I've paid — confirm";
@@ -410,12 +505,12 @@ function drawTicket(order){
   }
 }
 
-$("sendWhatsApp").addEventListener("click",()=>{ trackEvent("whatsapp_booking",{ticket_number:currentOrder.ticketNumber});
-  const text=encodeURIComponent("Mountain Sound ticket confirmation\nName: "+currentOrder.name+"\nNationality: "+currentOrder.nationality+"\nWhatsApp: "+currentOrder.customerWhatsApp+"\nTicket: "+currentOrder.ticketNumber);
+$("sendWhatsApp").addEventListener("click",()=>{
+  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
   const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
   window.open(web,"_blank","noopener,noreferrer");
 });
-$("downloadTicket").addEventListener("click",()=>{ trackEvent("ticket_download",{ticket_number:currentOrder.ticketNumber});
+$("downloadTicket").addEventListener("click",()=>{
   const a=document.createElement("a");a.download="mountain-sound-ticket-"+currentOrder.ticketNumber+".png";
   try{a.href=$("ticketCanvas").toDataURL("image/png");a.click()}catch(e){alert("Please take a screenshot of your ticket and send it to us on WhatsApp.")}
 });
