@@ -105,127 +105,55 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
  .modal{padding:28px 20px}
 }
 
-/* =========================================
-   MOUNTAIN SOUND — TICKET COUNTDOWN
-   Automatically counts down to the next Sunday at 1PM (GMT+7).
-   ========================================= */
-
+/* ===== MOUNTAIN SOUND TICKET COUNTDOWN ===== */
 .ticket-countdown{
-  background:#f5f0e4;
-  color:#20231a;
-  padding:88px 20px 92px;
-  border-top:1px solid #d8d1c2;
-  border-bottom:1px solid #d8d1c2;
-  text-align:center;
+  background:#f5f0e4;color:#20231a;padding:88px 20px 92px;
+  border-top:1px solid #d8d1c2;border-bottom:1px solid #d8d1c2;text-align:center
 }
-
-.countdown-wrap{
-  max-width:1120px;
-  margin:0 auto;
-}
-
+.countdown-wrap{max-width:1120px;margin:0 auto}
 .countdown-eyebrow{
   font:600 12px "Avenir Next","Helvetica Neue",Arial,sans-serif;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:#697064;
-  margin-bottom:14px;
+  letter-spacing:.14em;text-transform:uppercase;color:#697064;margin-bottom:14px
 }
-
-.countdown-title{
-  font-size:clamp(30px,4vw,48px);
-  font-weight:400;
-  line-height:1.1;
-  margin-bottom:48px;
-}
-
-.countdown-timer{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  gap:clamp(8px,2.7vw,34px);
-}
-
-.countdown-unit{
-  min-width:125px;
-}
-
+.countdown-title{font-size:clamp(30px,4vw,48px);font-weight:400;line-height:1.1;margin-bottom:48px}
+.countdown-timer{display:flex;justify-content:center;align-items:flex-start;gap:clamp(8px,2.7vw,34px)}
+.countdown-unit{min-width:125px}
 .countdown-number{
-  display:block;
-  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
-  font-size:clamp(58px,8.5vw,104px);
-  font-weight:300;
-  line-height:.9;
-  letter-spacing:-.045em;
-  font-variant-numeric:tabular-nums;
+  display:block;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+  font-size:clamp(58px,8.5vw,104px);font-weight:300;line-height:.9;
+  letter-spacing:-.045em;font-variant-numeric:tabular-nums
 }
-
 .countdown-unit small{
-  display:block;
-  margin-top:17px;
-  font:500 11px "Avenir Next","Helvetica Neue",Arial,sans-serif;
-  letter-spacing:.16em;
-  color:#697064;
+  display:block;margin-top:17px;font:500 11px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.16em;color:#697064
 }
-
 .countdown-separator{
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;
-  font-size:clamp(48px,7vw,82px);
-  font-weight:300;
-  line-height:.82;
-  color:#7c8076;
+  font-size:clamp(48px,7vw,82px);font-weight:300;line-height:.82;color:#7c8076
 }
-
 .countdown-date{
-  margin-top:48px;
-  font:600 14px "Avenir Next","Helvetica Neue",Arial,sans-serif;
-  letter-spacing:.11em;
-  text-transform:uppercase;
+  margin-top:48px;font:600 14px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.11em;text-transform:uppercase
 }
-
 .countdown-info{
-  margin-top:11px;
-  font:12px "Avenir Next","Helvetica Neue",Arial,sans-serif;
-  letter-spacing:.12em;
-  color:#697064;
-  text-transform:uppercase;
+  margin-top:11px;font:12px "Avenir Next","Helvetica Neue",Arial,sans-serif;
+  letter-spacing:.12em;color:#697064;text-transform:uppercase
 }
-
-.countdown-open{
-  margin-top:26px;
-}
-
-.countdown-open .btn{
-  display:inline-block;
-}
-
+.countdown-open{margin-top:26px}
+.countdown-open .btn{display:inline-block}
 @media(max-width:800px){
   .ticket-countdown{padding:72px 18px 76px}
-  .countdown-unit{min-width:82px}
-  .countdown-timer{gap:7px}
+  .countdown-unit{min-width:82px}.countdown-timer{gap:7px}
 }
-
 @media(max-width:520px){
   .ticket-countdown{padding:60px 10px 64px}
   .countdown-eyebrow{font-size:10px}
   .countdown-title{font-size:28px;margin-bottom:32px}
-  .countdown-timer{gap:3px}
-  .countdown-unit{min-width:64px}
+  .countdown-timer{gap:3px}.countdown-unit{min-width:64px}
   .countdown-number{font-size:39px;letter-spacing:-.04em}
-  .countdown-unit small{
-    margin-top:10px;
-    font-size:7px;
-    letter-spacing:.08em;
-  }
-  .countdown-separator{
-    font-size:32px;
-    margin-top:-2px;
-  }
-  .countdown-date{
-    margin-top:31px;
-    font-size:10px;
-    line-height:1.6;
-  }
+  .countdown-unit small{margin-top:10px;font-size:7px;letter-spacing:.08em}
+  .countdown-separator{font-size:32px;margin-top:-2px}
+  .countdown-date{margin-top:31px;font-size:10px;line-height:1.6}
   .countdown-info{font-size:9px;line-height:1.5}
 }
 
@@ -299,41 +227,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
   <div class="countdown-wrap">
     <div class="countdown-eyebrow">Next Mountain Sound</div>
     <div class="countdown-title" id="countdownTitle">THE NEXT SUNDAY BEGINS IN</div>
-
-    <div class="countdown-timer" aria-label="Countdown to the next Mountain Sound event">
-      <div class="countdown-unit">
-        <span class="countdown-number" id="countDays">00</span>
-        <small>DAYS</small>
-      </div>
-
+    <div class="countdown-timer">
+      <div class="countdown-unit"><span class="countdown-number" id="countDays">00</span><small>DAYS</small></div>
       <div class="countdown-separator">:</div>
-
-      <div class="countdown-unit">
-        <span class="countdown-number" id="countHours">00</span>
-        <small>HOURS</small>
-      </div>
-
+      <div class="countdown-unit"><span class="countdown-number" id="countHours">00</span><small>HOURS</small></div>
       <div class="countdown-separator">:</div>
-
-      <div class="countdown-unit">
-        <span class="countdown-number" id="countMinutes">00</span>
-        <small>MINUTES</small>
-      </div>
-
+      <div class="countdown-unit"><span class="countdown-number" id="countMinutes">00</span><small>MINUTES</small></div>
       <div class="countdown-separator">:</div>
-
-      <div class="countdown-unit">
-        <span class="countdown-number" id="countSeconds">00</span>
-        <small>SECONDS</small>
-      </div>
+      <div class="countdown-unit"><span class="countdown-number" id="countSeconds">00</span><small>SECONDS</small></div>
     </div>
-
     <div class="countdown-date" id="countdownDate">SUNDAY · 1PM — SUNSET</div>
     <div class="countdown-info">150,000 KIP · LIMITED CAPACITY</div>
-
-    <div class="countdown-open">
-      <button class="btn" id="countdownBuy">BUY TICKET</button>
-    </div>
+    <div class="countdown-open"><button class="btn" id="countdownBuy">BUY TICKET</button></div>
   </div>
 </section>
 
@@ -447,7 +352,7 @@ function resetBuy(){
   $("step1").style.display="block";$("step2").style.display="none";$("step3").style.display="none";
 }
 function startBuy(){resetBuy();openOverlay($("buyOverlay"))}
-["navBuy","heroBuy","ticketBuy","closerBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
+["navBuy","heroBuy","ticketBuy","closerBuy","countdownBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
 
 $("viewTicket").addEventListener("click",()=>openOverlay($("viewOverlay")));
 $("viewClose").addEventListener("click",()=>closeOverlay($("viewOverlay")));
