@@ -429,8 +429,10 @@ function generateTicketNumber(){
   return "MS-"+datePart+"-"+Math.floor(1000+Math.random()*9000);
 }
 function saveOrder(o){
- try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch(e){}
-  orders.push(o);localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
+  let orders=[];
+  try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch(e){}
+  orders.push(o);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
 }
 
 $("confirmPaid").addEventListener("click",()=>{
