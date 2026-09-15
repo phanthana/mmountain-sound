@@ -386,7 +386,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 <script>
 (function(){
 "use strict";
-const $=id=>document.getElementById(id);
+const $=id=>document.getElementById(id.replace(/^#/,""));
 const STORAGE_KEY="mountainSoundOrders";
 const ADMIN_PASSCODE="MountainSound2026";
 const ORGANIZER_WHATSAPP="8562055615282";
@@ -414,10 +414,10 @@ $("backStep1").addEventListener("click",()=>{$("step2").style.display="none";$("
 
 $("detailsForm").addEventListener("submit",e=>{
   e.preventDefault();
-  const name=$("#fullName").value.trim(), nationality=$("#nationality").value.trim(), customerWhatsApp=$("#customerWhatsApp").value.trim();
+  const name=$("fullName").value.trim(), nationality=$("nationality").value.trim(), customerWhatsApp=$("customerWhatsApp").value.trim();
   let valid=true;
-  $("nameField").classList.toggle("invalid",name.length<2);
-  $("nationalityField").classList.toggle("invalid",nationality.length<2);
+ $("nameField").classList.toggle("invalid",name.length<2);
+ $("nationalityField").classList.toggle("invalid",nationality.length<2);
   if(name.length<2||nationality.length<2)return;
   currentOrder.name=name;currentOrder.nationality=nationality;currentOrder.customerWhatsApp=customerWhatsApp;
   $("summaryName").textContent=name;
