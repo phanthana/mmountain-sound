@@ -441,7 +441,7 @@ $("confirmPaid").addEventListener("click",()=>{
     currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
     drawTicket(currentOrder);
     saveOrder({...currentOrder});
-    fetch("https://script.google.com/macros/s/AKfycbzbSUU-IcoNt4b0MLju6NPXiTAEve61E0YkrCOCWhD3P8BjyE5zDYPy9sswobufBJ/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...currentOrder})}).catch(()=>{});
+fetch("https://script.google.com/macros/s/AKfycbzbixyZ_-m5W8FmrDVs3F6dh6C8t-VeQSvneSwic612GORQKvJ5iWlwXRQMc2DzUmNJ/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...currentOrder})}).catch(()=>{});
     drawTicket(currentOrder);
     drawTicket(currentOrder);
     $("step2").style.display="none";$("step3").style.display="block";
