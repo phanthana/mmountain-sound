@@ -337,7 +337,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <p class="sub">Tell us who's coming — this goes on your ticket.</p>
       <form id="detailsForm" novalidate>
         <div class="field" id="nameField"><label for="fullName">Full name</label><input id="fullName" placeholder="e.g. Somchai Vongsa"><div class="field-error">Please enter your full name.</div></div>
-        <div class="field" id="nationalityField"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Lao, French, Australian"><div class="field-error">Please enter your nationality.</div></div>
+        <div class="field" id="nationalityField"><label for="nationality">const nationality</label><input id="nationality" placeholder="e.g. Lao, French, Australian"><div class="field-error">Please enter your nationality.</div></div><div class="field"><label for="customerWhatsApp">WhatsApp number</label><input id="customerWhatsApp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+856 20 1234 5678" required></div>
         <button class="btn-block" type="submit">Continue to payment</button>
       </form>
     </div>
@@ -413,12 +413,12 @@ $("backStep1").addEventListener("click",()=>{$("step2").style.display="none";$("
 
 $("detailsForm").addEventListener("submit",e=>{
   e.preventDefault();
-  const name=$("fullName").value.trim(), nationality=$("nationality").value.trim();
+  const name=$("#fullName").value.trim(), nationality=$("#nationality").value.trim(), customerWhatsApp=$("#customerWhatsApp").value.trim();
   let valid=true;
   $("nameField").classList.toggle("invalid",name.length<2);
   $("nationalityField").classList.toggle("invalid",nationality.length<2);
   if(name.length<2||nationality.length<2)return;
-  currentOrder.name=name;currentOrder.nationality=nationality;
+  currentOrder.name=name;currentOrder.nationality=nationality;currentOrder.customerWhatsApp=customerWhatsApp;
   $("summaryName").textContent=name;
   $("step1").style.display="none";$("step2").style.display="block";
 });
@@ -428,7 +428,7 @@ function generateTicketNumber(){
   return "MS-"+datePart+"-"+Math.floor(1000+Math.random()*9000);
 }
 function saveOrder(o){
-  let orders=[];try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){}
+ try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch(e){}
   orders.push(o);localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
 }
 
@@ -436,7 +436,10 @@ $("confirmPaid").addEventListener("click",()=>{
   const btn=$("confirmPaid");btn.disabled=true;btn.textContent="Preparing ticket…";
   setTimeout(()=>{
     currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
+    drawTicket(currentOrder);
     saveOrder({...currentOrder});
+    fetch("https://script.google.com/macros/s/AKfycbzbSUU-IcoNt4b0MLju6NPXiTAEve61E0YkrCOCWhD3P8BjyE5zDYPy9sswobufBJ/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...currentOrder})}).catch(()=>{});
+    drawTicket(currentOrder);
     drawTicket(currentOrder);
     $("step2").style.display="none";$("step3").style.display="block";
     btn.disabled=false;btn.textContent="I've paid — confirm";
