@@ -44,6 +44,9 @@ nav a{color:#e6e0d3}
 .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .schedule{font:14px "Avenir Next",Arial,sans-serif;color:#ddd6c8;margin-top:20px}
 .schedule strong{color:white}
+.hero-chips{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid rgba(245,240,228,.18)}
+.hero-chip{font:13px "Avenir Next",Arial,sans-serif;color:#ddd6c8}
+.hero-chip strong{display:block;color:white;font-size:15px;margin-bottom:2px}
 section{padding:105px 0;border-top:1px solid var(--line)}
 .eyebrow{font:600 12px "Avenir Next",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--river);margin-bottom:14px}
 h2{font-size:clamp(30px,4vw,46px);font-weight:400;line-height:1.12}
@@ -186,13 +189,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
   <img src="images/Hero.jpg.png" alt="Mountain Sound riverside setting in Vang Vieng">
   <div class="hero-content wrap">
     <div class="hero-kicker">Riverside · Vang Vieng · Laos</div>
-    <h1>Find your Sunday rhythm.</h1>
-    <p>Good music, mountain air and a riverside escape — a daytime party from early afternoon to sunset.</p>
+    <h1>Sunday never looked like this.</h1>
+    <p>A daytime riverside party in the heart of Vang Vieng — good music, mountain views, and a sunset you won't want to leave.</p>
     <div class="hero-actions">
       <button class="btn" id="heroBuy">Buy Ticket</button>
       <a class="btn ghost" href="#details">See the details ↓</a>
     </div>
     <div class="schedule">Every Sunday <strong>1PM — Sunset</strong></div>
+    <div class="hero-chips">
+      <div class="hero-chip"><strong>150,000 KIP</strong>Entry</div>
+      <div class="hero-chip"><strong>Free tuk tuk</strong>Pickup from DK3 Milan Pizza</div>
+      <div class="hero-chip"><strong>QR checkout</strong>Secure BCEL/LAPNet payment</div>
+    </div>
   </div>
 </section>
 
@@ -398,7 +406,7 @@ const $=id=>document.getElementById(id);
 const STORAGE_KEY="mountainSoundOrders";
 const ADMIN_PASSCODE="MountainSound2026";
 const ORGANIZER_WHATSAPP="8562055615282";
-const MOUNTAIN_SOUND_SHEETS_URL="https://script.google.com/macros/s/AKfycbzbixyZ_-m5W8FmrDVs3F6dh6C8t-VeQSvneSwic612GORQKvJ5iWlwXRQMc2DzUmNJ/exec";
+  const MOUNTAIN_SOUND_SHEETS_URL="https://script.google.com/macros/s/AKfycbzbixyZ_-m5W8FmrDVs3F6dh6C8t-VeQSvneSwic612GORQKvJ5iWlwXRQMc2DzUmNJ/exec";
 let currentOrder={name:"",nationality:"",customerWhatsApp:"",ticketNumber:"",date:""};
 
 function openOverlay(el){el.classList.add("open");document.body.style.overflow="hidden"}
