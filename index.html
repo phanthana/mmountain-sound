@@ -17,6 +17,7 @@
 <meta property="og:description" content="Every Sunday, 1PM to sunset, riverside in Vang Vieng.">
 <meta property="og:image" content="images/Hero.jpg.png">
 <meta name="theme-color" content="#11130e">
+<link rel="icon" type="image/png" href="images/logo.png">
 <style>
 :root{--bg:#11130e;--panel:#1a1c15;--cream:#f5f0e4;--muted:#c6c0b1;--gold:#e3aa4c;--line:#35372c;--river:#77a99e;--danger:#d96b52}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,7 +29,8 @@ button{font:inherit;cursor:pointer}
 .sans{font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif}
 .wrap{max-width:1120px;margin:auto;padding:0 28px}
 header{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,12,8,.78),rgba(10,12,8,0))}
-.brand{font:600 15px "Avenir Next","Helvetica Neue",Arial,sans-serif;letter-spacing:.16em}
+.brand{font:600 15px "Avenir Next","Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;display:flex;align-items:center}
+.brand img{height:52px;width:auto;display:block}
 nav{display:flex;gap:25px;align-items:center;font:14px "Avenir Next","Helvetica Neue",Arial,sans-serif}
 nav a{color:#e6e0d3}
 .btn{border:0;border-radius:2px;background:var(--gold);color:#1a160d;padding:12px 20px;font:600 14px "Avenir Next","Helvetica Neue",Arial,sans-serif}
@@ -38,6 +40,7 @@ nav a{color:#e6e0d3}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.42) 0%,rgba(0,0,0,.10) 28%,rgba(6,8,4,.48) 54%,rgba(6,8,4,.96) 100%);z-index:1}
 .hero-content{position:relative;z-index:2;width:100%;padding:0 28px 64px;max-width:1120px;margin:0 auto}
+.hero-logo{width:170px;height:170px;object-fit:contain;margin:0 0 20px -2px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.58))}.hero-logo-wrap{display:flex;align-items:center}
 .hero-kicker{font:600 12px "Avenir Next",Arial,sans-serif;letter-spacing:.16em;color:#f0b84f;text-transform:uppercase;margin-bottom:14px;text-shadow:0 2px 12px rgba(0,0,0,.75)}
 .hero h1{font-size:clamp(42px,6.2vw,76px);font-weight:400;line-height:.98;max-width:720px;margin-bottom:20px;color:#fffaf0;text-shadow:0 3px 28px rgba(0,0,0,.72)}
 .hero p{max-width:620px;color:#f3eee3;font-size:18px;line-height:1.55;margin-bottom:30px;text-shadow:0 2px 18px rgba(0,0,0,.8)}
@@ -112,6 +115,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 }
 @media(max-width:520px){
  header{padding:15px 16px}.wrap{padding:0 18px}.hero-content{padding-left:18px;padding-right:18px}
+ .brand img{height:40px}
  .hero p{font-size:16px}.facts{grid-template-columns:1fr}
  .modal{padding:28px 20px}
 }
@@ -175,7 +179,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 </head>
 <body>
 <header>
-  <a class="brand" href="#top">MOUNTAIN SOUND</a>
+  <a class="brand" href="#top"><img src="images/logo.png" alt="Mountain Sound"></a>
   <nav>
     <a href="#experience">Experience</a>
     <a href="#details">Details</a>
@@ -188,6 +192,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 <section class="hero" id="top">
   <img src="images/Hero.jpg.png" alt="Mountain Sound riverside setting in Vang Vieng">
   <div class="hero-content wrap">
+    <div class="hero-logo-wrap"><img class="hero-logo" src="images/logo.png" alt="Mountain Sound logo"></div>
     <div class="hero-kicker">Riverside · Vang Vieng · Laos</div>
     <h1>Sunday never looked like this.</h1>
     <p>A daytime riverside party in the heart of Vang Vieng — good music, mountain views, and a sunset you won't want to leave.</p>
