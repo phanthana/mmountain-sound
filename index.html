@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QEEZV8TTRB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QEEZV8TTRB');
+  </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mountain Sound | Vang Vieng</title>
@@ -337,8 +345,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
       <p class="sub">Tell us who's coming — this goes on your ticket.</p>
       <form id="detailsForm" novalidate>
         <div class="field" id="nameField"><label for="fullName">Full name</label><input id="fullName" placeholder="e.g. Somchai Vongsa"><div class="field-error">Please enter your full name.</div></div>
-                <div class="field" id="nationalityField"><label for="nationality">Nationality</label><input id="nationality" type="text" placeholder="e.g. French" required></div>
-        <div class="field"><label for="customerWhatsApp">WhatsApp number</label><input id="customerWhatsApp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+856 20 1234 5678" required></div>
+        <div class="field" id="nationalityField"><label for="nationality">Nationality</label><input id="nationality" placeholder="e.g. Lao, French, Australian"><div class="field-error">Please enter your nationality.</div></div>
+        <div class="field" id="whatsappField"><label for="customerWhatsApp">WhatsApp Number</label><input id="customerWhatsApp" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. +856 20 5561 5282"><div class="field-error">Please enter a valid WhatsApp number.</div></div>
         <button class="btn-block" type="submit">Continue to payment</button>
       </form>
     </div>
@@ -386,11 +394,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 <script>
 (function(){
 "use strict";
-const $=id=>document.getElementById(id.replace(/^#/,""));
+const $=id=>document.getElementById(id);
 const STORAGE_KEY="mountainSoundOrders";
 const ADMIN_PASSCODE="MountainSound2026";
 const ORGANIZER_WHATSAPP="8562055615282";
-let currentOrder={name:"",nationality:"",ticketNumber:"",date:""};
+const MOUNTAIN_SOUND_SHEETS_URL="https://script.google.com/macros/s/AKfycbzbixyZ_-m5W8FmrDVs3F6dh6C8t-VeQSvneSwic612GORQKvJ5iWlwXRQMc2DzUmNJ/exec";
+let currentOrder={name:"",nationality:"",customerWhatsApp:"",ticketNumber:"",date:""};
 
 function openOverlay(el){el.classList.add("open");document.body.style.overflow="hidden"}
 function closeOverlay(el){el.classList.remove("open");document.body.style.overflow=""}
@@ -401,9 +410,25 @@ function resetBuy(){
   $("detailsForm").reset();
   $("nameField").classList.remove("invalid");
   $("nationalityField").classList.remove("invalid");
+  $("whatsappField").classList.remove("invalid");
   $("step1").style.display="block";$("step2").style.display="none";$("step3").style.display="none";
 }
-function startBuy(){resetBuy();openOverlay($("buyOverlay"))}
+function startBuy(){
+  resetBuy();
+  openOverlay($("buyOverlay"));
+  if(typeof gtag==="function"){
+    gtag("event","begin_checkout",{
+      currency:"LAK",
+      value:150000,
+      items:[{
+        item_id:"mountain_sound_ticket",
+        item_name:"Mountain Sound Sunday Ticket",
+        price:150000,
+        quantity:1
+      }]
+    });
+  }
+}
 ["navBuy","heroBuy","ticketBuy","closerBuy"].forEach(id=>$(id).addEventListener("click",startBuy));
 
 $("viewTicket").addEventListener("click",()=>openOverlay($("viewOverlay")));
@@ -414,12 +439,23 @@ $("backStep1").addEventListener("click",()=>{$("step2").style.display="none";$("
 
 $("detailsForm").addEventListener("submit",e=>{
   e.preventDefault();
-  const name=$("fullName").value.trim(), nationality=$("nationality").value.trim(), customerWhatsApp=$("customerWhatsApp").value.trim();
-  let valid=true;
- $("nameField").classList.toggle("invalid",name.length<2);
- $("nationalityField").classList.toggle("invalid",nationality.length<2);
-  if(name.length<2||nationality.length<2)return;
-  currentOrder.name=name;currentOrder.nationality=nationality;currentOrder.customerWhatsApp=customerWhatsApp;
+  const name=$("fullName").value.trim();
+  const nationality=$("nationality").value.trim();
+  const customerWhatsApp=$("customerWhatsApp").value.trim();
+  const whatsappDigits=customerWhatsApp.replace(/\\D/g,"");
+  const validName=name.length>=2;
+  const validNationality=nationality.length>=2;
+  const validWhatsApp=whatsappDigits.length>=8 && whatsappDigits.length<=15;
+
+  $("nameField").classList.toggle("invalid",!validName);
+  $("nationalityField").classList.toggle("invalid",!validNationality);
+  $("whatsappField").classList.toggle("invalid",!validWhatsApp);
+
+  if(!validName||!validNationality||!validWhatsApp)return;
+
+  currentOrder.name=name;
+  currentOrder.nationality=nationality;
+  currentOrder.customerWhatsApp=customerWhatsApp;
   $("summaryName").textContent=name;
   $("step1").style.display="none";$("step2").style.display="block";
 });
@@ -429,20 +465,53 @@ function generateTicketNumber(){
   return "MS-"+datePart+"-"+Math.floor(1000+Math.random()*9000);
 }
 function saveOrder(o){
-  let orders=[];
-  try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch(e){}
-  orders.push(o);
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
+  let orders=[];try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch(e){}
+  orders.push(o);localStorage.setItem(STORAGE_KEY,JSON.stringify(orders));
 }
 
 $("confirmPaid").addEventListener("click",()=>{
-  const btn=$("confirmPaid");btn.disabled=true;btn.textContent="Preparing ticket…";
+  const btn=$("confirmPaid");btn.disabled=true;btn.textContent="Saving booking…";
+
+  currentOrder.ticketNumber=generateTicketNumber();
+  currentOrder.date=new Date().toISOString();
+
+  // Keep a local backup.
+  saveOrder({...currentOrder});
+
+  // Send booking to Google Sheets via the Apps Script Web App.
+  const bookingPayload={
+    ticketNumber:currentOrder.ticketNumber,
+    name:currentOrder.name,
+    nationality:currentOrder.nationality,
+    date:currentOrder.date,
+    customerWhatsApp:currentOrder.customerWhatsApp
+  };
+
+  fetch(MOUNTAIN_SOUND_SHEETS_URL,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify(bookingPayload)
+  }).catch(function(err){
+    console.warn("Google Sheets booking submission failed:",err);
+  });
+
+  // Track ticket confirmation in Google Analytics.
+  if(typeof gtag==="function"){
+    gtag("event","purchase",{
+      transaction_id:currentOrder.ticketNumber,
+      value:150000,
+      currency:"LAK",
+      items:[{
+        item_id:"mountain_sound_ticket",
+        item_name:"Mountain Sound Sunday Ticket",
+        price:150000,
+        quantity:1
+      }]
+    });
+  }
+
   setTimeout(()=>{
-    currentOrder.ticketNumber=generateTicketNumber();currentOrder.date=new Date().toISOString();
-    drawTicket(currentOrder);
-    saveOrder({...currentOrder});
-fetch("https://script.google.com/macros/s/AKfycbzbixyZ_-m5W8FmrDVs3F6dh6C8t-VeQSvneSwic612GORQKvJ5iWlwXRQMc2DzUmNJ/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...currentOrder})}).catch(()=>{});
-    drawTicket(currentOrder);
     drawTicket(currentOrder);
     $("step2").style.display="none";$("step3").style.display="block";
     btn.disabled=false;btn.textContent="I've paid — confirm";
@@ -468,7 +537,7 @@ function drawTicket(order){
 }
 
 $("sendWhatsApp").addEventListener("click",()=>{
-  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
+  const text=encodeURIComponent(["Mountain Sound ticket confirmation","Name: "+currentOrder.name,"Nationality: "+currentOrder.nationality,"Customer WhatsApp: "+currentOrder.customerWhatsApp,"Ticket No: "+currentOrder.ticketNumber].join("\n"));
   const web="https://web.whatsapp.com/send?phone="+ORGANIZER_WHATSAPP+"&text="+text;
   window.open(web,"_blank","noopener,noreferrer");
 });
